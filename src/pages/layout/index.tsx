@@ -1,9 +1,13 @@
 import {Outlet} from 'react-router-dom'
 import Tabs from "../../components/Tabs";
-import {useEffect} from "react";
+import {useEffect, useRef} from "react";
 import Lenis from "@studio-freight/lenis";
+import {gsap} from 'gsap';
+import styles from './Layout.module.scss';
 
 const Layout = () => {
+
+    const tabsRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const lenis = new Lenis({
@@ -18,6 +22,22 @@ const Layout = () => {
 
         requestAnimationFrame(raf);
 
+        // tabs动画
+        gsap.fromTo(
+            tabsRef.current,
+            {
+                y: 100,
+                opacity: 0,
+            },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: "power3.out",
+                delay: 0.3
+            }
+        );
+
         return () => {
             lenis.destroy();
         };
@@ -25,7 +45,9 @@ const Layout = () => {
 
     return (
         <>
-            <Tabs/>
+            <div ref={tabsRef} className={styles.tabsWrapper}>
+                <Tabs/>
+            </div>
             <main style={{paddingTop: 50, minHeight: 'calc(100vh - 50px)'}}>
                 <Outlet/>
             </main>
