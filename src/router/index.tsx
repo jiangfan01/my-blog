@@ -1,14 +1,17 @@
-import {Route, Routes} from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
+import Welcome from "../pages/welcome";
 import Layout from "../pages/layout";
 
 const App = () => {
     return (
         <Routes>
-            <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Navigate to="/welcome" replace />} />
 
-            </Route>
-            <Route path="/"></Route>
+            <Route path="/welcome" element={<Welcome />} />
+
+            <Route path="/home" element={<Layout />} />
         </Routes>
-    )
-}
-export default  App
+    );
+};
+
+export default App;
