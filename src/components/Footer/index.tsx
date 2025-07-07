@@ -2,6 +2,8 @@ import React, {useEffect, useState, useRef} from "react";
 import styles from "./Footer.module.scss";
 import {FaGithub, FaWeixin, FaVideo} from "react-icons/fa";
 import gsap from "gsap";
+import douyin from "../../assets/images/douyin.jpg"
+import wexin from "../../assets/images/weixin.jpg"
 
 const Footer: React.FC = () => {
     const [visibleQr, setVisibleQr] = useState<"wechat" | "douyin" | null>(null);
@@ -52,7 +54,7 @@ const Footer: React.FC = () => {
                     <FaVideo/>
                     {visibleQr === "douyin" && (
                         <div className={styles.qrPopup} ref={qrRef}>
-                            <img src="/src/assets/images/douyin.jpg" alt="抖音二维码"/>
+                            <img src={douyin} alt="抖音二维码"/>
                             <span>抖音扫码关注</span>
                         </div>
                     )}
@@ -67,7 +69,7 @@ const Footer: React.FC = () => {
                     <FaWeixin/>
                     {visibleQr === "wechat" && (
                         <div className={styles.qrPopup} ref={qrRef}>
-                            <img src="/src/assets/images/weixin.jpg" alt="微信二维码"/>
+                            <img src={wexin} alt="微信二维码"/>
                             <span>微信扫码加我</span>
                         </div>
                     )}

@@ -2,6 +2,7 @@ import React, {useEffect, useRef} from "react";
 import styles from "./Hero.module.scss";
 import gsap from "gsap";
 import {showMessage} from "../MessageBox/useMessage.ts";
+import avatar from "../../assets/images/avatar.jpg"
 
 const Hero: React.FC = () => {
     const cardRef = useRef<HTMLDivElement>(null);
@@ -42,7 +43,7 @@ const Hero: React.FC = () => {
             <div className={styles.heroCard} ref={cardRef}>
                 {/* 左边头像 */}
                 <div className={styles.avatarBox} ref={avatarRef}>
-                    <img src="/src/assets/images/avatar.jpg" alt="头像"/>
+                    <img src={avatar} alt="头像"/>
                 </div>
 
                 {/* 右边文本信息 */}
