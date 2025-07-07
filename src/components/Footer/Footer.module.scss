@@ -1,0 +1,121 @@
+.footer {
+  background-color: #0f0f0f;
+  color: #ccc;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  border-top: 1px solid #222;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  @media (min-width: 600px) {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 120px;
+  }
+}
+
+.socialLinks {
+  display: flex;
+  gap: 20px;
+  font-size: 20px;
+
+  a {
+    color: #ccc;
+    transition: color 0.3s;
+    &:hover {
+      color: #1e90ff;
+    }
+  }
+
+  .iconWrapper {
+    position: relative;
+    cursor: pointer;
+
+    svg {
+      color: #ccc;
+      transition: color 0.3s;
+    }
+
+    &:hover svg {
+      color: #1e90ff;
+    }
+
+    .qrPopup {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border-radius: 12px;
+      padding: 24px;
+      width: 180px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      z-index: 10;
+      animation: fadeIn 0.3s ease;
+
+      img {
+        width: 140px;
+        height: 140px;
+        border-radius: 8px;
+        margin-bottom: 8px;
+      }
+
+      span {
+        font-size: 12px;
+        color: #fff;
+      }
+
+      // 默认（桌面）展示在上方
+      bottom: 130%;
+
+      // 移动端：展示在下方
+      @media (max-width: 768px) {
+        top: 130%;
+        bottom: auto;
+        animation: fadeDown 0.3s ease;
+      }
+    }
+  }
+}
+
+.qrPopup {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 12px;
+  width: 150px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+
+  span {
+    font-size: 12px;
+    color: #fff;
+  }
+
+  // 默认浮层在上方
+  bottom: 130%;
+
+  // 移动端：浮层在下方
+  @media (max-width: 768px) {
+    top: 130%;
+    bottom: auto;
+  }
+}

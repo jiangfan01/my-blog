@@ -1,0 +1,61 @@
+.skillWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: 970px;
+  background: rgba(255, 255, 255, 0.9); // 纯白背景或微透明白背景
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0;
+  margin-top: 50px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 30px 20px;
+  }
+}
+
+.title {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-left: 20px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f0f0f0;
+  color: #333;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  cursor: default;
+  user-select: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: #06c; // 苹果浅蓝
+    background: #e6f0ff; // 轻微蓝色背景强化效果
+  }
+}
+
+.icon {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  color: inherit; // 继承字体颜色，hover也会变色
+}

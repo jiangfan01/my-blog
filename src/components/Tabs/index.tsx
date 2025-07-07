@@ -5,12 +5,7 @@ import styles from './Tabs.module.scss';
 const Tabs: React.FC = () => {
     const tabList = [
         {label: '首页', key: 'home'},
-        {label: 'JavaScript', key: 'js'},
-        {label: 'React', key: 'react'},
-        {label: 'Vue', key: 'vue'},
-        {label: '浏览器', key: 'browser'},
-        {label: '网络', key: 'network'},
-        {label: 'Project', key: 'project'},
+        {label: '精选文章', key: 'articles'}
     ];
     const [active, setActive] = useState('home');
 
