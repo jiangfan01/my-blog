@@ -4,7 +4,7 @@ import { resolve } from 'path'
 import fs from 'fs'
 
 export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/my-blog' : '/',
+  base: process.env.NODE_ENV === 'production' ? '/my-blog/' : '/',
   plugins: [
     react(),
     {
