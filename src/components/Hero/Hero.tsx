@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, {useEffect, useRef} from "react";
 import styles from "./Hero.module.scss";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { showMessage } from "../MessageBox/useMessage";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
+import {showMessage} from "../MessageBox/useMessage";
 import avatar from "../../assets/images/avatar.jpg";
 
 // 注册 ScrollTrigger 插件
@@ -13,10 +13,15 @@ const Hero: React.FC = () => {
     const avatarRef = useRef<HTMLDivElement>(null);
     const infoRef = useRef<HTMLDivElement>(null);
 
-    const handleCopy = () => {
-        navigator.clipboard.writeText("jf1431037397@gmail.com");
-        showMessage("📋 邮箱已复制！");
+    const handleCopy = (text: string) => {
+        navigator.clipboard.writeText(text);
+        showMessage("✅ 已复制至剪切板！");
     };
+
+    const contactInfo = {
+        phone: "13647228144",
+        email: "jf1431037397@gmail.com",
+    }
 
     useEffect(() => {
         const tl = gsap.timeline({
@@ -25,24 +30,24 @@ const Hero: React.FC = () => {
                 start: "top 80%",
                 once: true,
             },
-            defaults: { ease: "power3.out", duration: 1 },
+            defaults: {ease: "power3.out", duration: 1},
         });
 
         tl.fromTo(
             cardRef.current,
-            { opacity: 0, scale: 0.95 },
-            { opacity: 1, scale: 1, duration: 0.8 }
+            {opacity: 0, scale: 0.95},
+            {opacity: 1, scale: 1, duration: 0.8}
         )
             .fromTo(
                 avatarRef.current,
-                { x: -50, opacity: 0 },
-                { x: 0, opacity: 1 },
+                {x: -50, opacity: 0},
+                {x: 0, opacity: 1},
                 "-=0.4"
             )
             .fromTo(
                 infoRef.current,
-                { y: 50, opacity: 0 },
-                { y: 0, opacity: 1 },
+                {y: 50, opacity: 0},
+                {y: 0, opacity: 1},
                 "-=0.6"
             );
     }, []);
@@ -51,7 +56,7 @@ const Hero: React.FC = () => {
         <div className={styles.heroWrapper}>
             <div className={styles.heroCard} ref={cardRef}>
                 <div className={styles.avatarBox} ref={avatarRef}>
-                    <img src={avatar} alt="头像" />
+                    <img src={avatar} alt="头像"/>
                 </div>
                 <div className={styles.infoBox} ref={infoRef}>
                     <h1>
@@ -66,14 +71,22 @@ const Hero: React.FC = () => {
                         <li>
                             <strong>🧑‍💻 专业：</strong> 软件工程
                         </li>
-                        <li onClick={handleCopy}>
+                        <li onClick={() => handleCopy(contactInfo.phone)}>
+                            <strong>📞 电话：</strong>{" "}
+                            <span> +86 </span>
+                            <a href="mailto:JiangFANANan@example.com">
+                                13647228144
+                            </a>
+
+                        </li>
+                        <li onClick={() => handleCopy(contactInfo.email)}>
                             <strong>📬 邮箱：</strong>{" "}
                             <a href="mailto:JiangFANANan@example.com">
                                 jf1431037397@gmail.com
                             </a>
                         </li>
                         <li>
-                            <strong>📍 地址：</strong> 武汉
+                            <strong>📍 地址：</strong> 湖北武汉
                         </li>
                     </ul>
 
