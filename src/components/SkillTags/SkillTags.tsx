@@ -1,8 +1,11 @@
 import {useEffect, useRef} from "react";
 import styles from "./SkillTags.module.scss";
 import gsap from "gsap";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
 
 import {FaReact, FaNodeJs, FaVuejs} from "react-icons/fa";
+
+gsap.registerPlugin(ScrollTrigger); // 注册插件
 
 const skillList = [
     {name: "React", icon: <FaReact/>},
@@ -24,6 +27,7 @@ const skillList = [
 
 const SkillTags = () => {
     const tagRefs = useRef<HTMLSpanElement[]>([]);
+    const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         gsap.fromTo(
@@ -35,12 +39,17 @@ const SkillTags = () => {
                 stagger: 0.08,
                 duration: 0.6,
                 ease: "power2.out",
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top 80%",
+                    once: true,
+                },
             }
         );
     }, []);
 
     return (
-        <div className={styles.skillWrapper}>
+        <div className={styles.skillWrapper} ref={containerRef}>
             <div className={styles.card}>
                 <h2 className={styles.title}>🧠 技能标签</h2>
                 <div className={styles.tags}>

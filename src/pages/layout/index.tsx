@@ -49,7 +49,7 @@ const Layout = () => {
             <div ref={tabsRef} className={styles.tabsWrapper}>
                 <Tabs/>
             </div>
-            <main style={{paddingTop: "20vh", minHeight: 'calc(100vh - 50px)'}}>
+            <main style={{paddingTop: "10vh", minHeight: 'calc(100vh - 50px)'}}>
                 <Home/>
             </main>
             <Footer/>

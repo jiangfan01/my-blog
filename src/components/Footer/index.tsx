@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
 
     return (
         <footer className={styles.footer}>
-            <p className={styles.copyright}>© 2025 Jiang F的个人博客</p>
+            <p className={styles.copyright}>© 2025 Jiang Fan的个人博客</p>
             <div className={styles.socialLinks}>
                 <a href="https://github.com/jiangfan01" target="_blank" rel="noreferrer">
                     <FaGithub/>
