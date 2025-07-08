@@ -23,7 +23,7 @@ const Tabs: React.FC = () => {
 
     const tabList = [
         {key: "home", label: "首页", icon: <AiFillHome/>},
-        {key: "CSS3", label: "CSS3", icon: <FaCss3Alt/>},
+        {key: "Css", label: "CSS3", icon: <FaCss3Alt/>},
         {key: "JavaScript", label: "JavaScript", icon: <FaJs/>},
         {key: "React", label: "React", icon: <FaReact/>},
         {key: "Vue", label: "Vue", icon: <FaVuejs/>},
@@ -66,8 +66,11 @@ const Tabs: React.FC = () => {
     };
 
     const handleTabClick = (index: number) => {
-        console.log(`点击了 ${tabList[index].label}`);
-        navigate(`/${tabList[index].key}`)
+        if (index === 0) {
+            navigate('/home')
+        }else{
+            navigate(`/home/articles/${tabList[index].key}`)
+        }
     };
 
     return (
