@@ -1,3 +1,25 @@
+.centerTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  color: #222;
+}
+
+.iconLeft {
+  display: flex;
+  align-items: center;
+  font-size: 2.2rem;
+
+  svg {
+    width: 1.5em;
+    height: 1.5em;
+  }
+}
 .articleList {
   max-width: 820px;
   margin: 5vh auto;
@@ -41,9 +63,26 @@
 }
 
 .answer {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.3);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+  backdrop-filter: blur(14px);
+  position: relative;
+  box-shadow:
+          inset 0 2px 6px rgba(0, 0, 0, 0.2),    // 内部暗影（下凹效果）
+          inset 0 -1px 3px rgba(255, 255, 255, 0.3), // 内部亮边（上浮感）
+          0 6px 20px rgba(0, 0, 0, 0.05);        // 外部轻微浮动阴影
+
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.answer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  mix-blend-mode: overlay;
 }

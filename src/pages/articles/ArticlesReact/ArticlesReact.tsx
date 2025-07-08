@@ -1,5 +1,6 @@
 import React from "react";
 import ArticleList from "../../../components/ArticleList/ArticleList.tsx";
+import {FaReact} from "react-icons/fa";
 
 const ArticlesReact: React.FC = () => {
     const reactArticles = [
@@ -139,7 +140,7 @@ const element = <h1>Hello World</h1>;
     return (
         <>
             <div>
-                <ArticleList data={reactArticles}/>
+                <ArticleList data={reactArticles} centerTitle="React" icon={<FaReact color="#61dafb"/>}/>
             </div>
         </>
     );

@@ -14,12 +14,20 @@ interface ArticleItem {
     answer: string;
 }
 
-const ArticleList: React.FC<{ data: ArticleItem[] }> = ({data}) => {
+interface ArticleListProps {
+    data: ArticleItem[];
+    centerTitle: string;
+    icon?: React.ReactNode;
+}
+
+const ArticleList: React.FC<ArticleListProps> = ({data, centerTitle, icon}) => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
-    const containerRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement | null>(null);
+    const centerTitleRef = useRef<HTMLDivElement | null>(null);
     const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     useEffect(() => {
+        gsap.fromTo(centerTitleRef.current, {opacity: 0, x: 200}, {opacity: 1, x: 0, duration: 1, ease: "power3.out"})
         if (containerRef.current) {
             gsap.fromTo(
                 containerRef.current,
@@ -66,40 +74,48 @@ const ArticleList: React.FC<{ data: ArticleItem[] }> = ({data}) => {
     };
 
     return (
-        <div className={styles.articleList} ref={containerRef}>
-            {data.map((item, index) => (
-                <div key={index} className={styles.articleItem}>
-                    <div className={styles.question} onClick={() => toggle(index)}>
-                        <span>{index + 1}. {item.question}</span>
-                        <span className={styles.icon}>{openIndex === index ? "▲" : "▼"}</span>
-                    </div>
+        <>
+            <div className={styles.centerTitle} ref={centerTitleRef}>
+                {icon && <span className={styles.iconLeft}>{icon}</span>}
+                {centerTitle}
+            </div>
+            <div className={styles.articleList} ref={containerRef}>
+                {data.map((item, index) => (
+                    <div key={index} className={styles.articleItem}>
+                        <div className={styles.question} onClick={() => toggle(index)}>
+                            <span>{index + 1}. {item.question}</span>
+                            <span className={styles.icon}>{openIndex === index ? "▲" : "▼"}</span>
+                        </div>
 
-                    <div
-                        className={styles.answerWrapper}
-                        ref={(el) => (contentRefs.current[index] = el)}
-                        style={{height: 0, overflow: "hidden", opacity: 0}}
-                    >
-                        <div className={styles.answer}>
-                            <ReactMarkdown
-                                children={item.answer}
-                                remarkPlugins={[remarkGfm]}
-                                rehypePlugins={[rehypeHighlight]}
-                                components={{
-                                    img: ({node, ...props}) => (
-                                        <img {...props} style={{maxWidth: "50%", borderRadius: 8, margin: "0 auto"}}/>
-                                    ),
-                                    table: ({node, ...props}) => (
-                                        <div style={{overflowX: "auto"}}>
-                                            <table {...props} />
-                                        </div>
-                                    )
-                                }}
-                            />
+                        <div
+                            className={styles.answerWrapper}
+                            ref={(el) => {
+                                contentRefs.current[index] = el;
+                            }}
+                            style={{height: 0, overflow: "hidden", opacity: 0}}
+                        >
+                            <div className={styles.answer}>
+                                <ReactMarkdown
+                                    children={item.answer}
+                                    remarkPlugins={[remarkGfm]}
+                                    rehypePlugins={[rehypeHighlight]}
+                                    // components={{
+                                    //     img: ({node, ...props}) => (
+                                    //         <img {...props} style={{maxWidth: "50%", borderRadius: 8, margin: "0 auto"}}/>
+                                    //     ),
+                                    //     table: ({node, ...props}) => (
+                                    //         <div style={{overflowX: "auto"}}>
+                                    //             <table {...props} />
+                                    //         </div>
+                                    //     )
+                                    // }}
+                                />
+                            </div>
                         </div>
                     </div>
-                </div>
-            ))}
-        </div>
+                ))}
+            </div>
+        </>
     );
 };
 
