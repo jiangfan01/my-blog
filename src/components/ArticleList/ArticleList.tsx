@@ -1,121 +1,156 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github.css";
-import gsap from "gsap";
-import {ScrollTrigger} from "gsap/ScrollTrigger";
 import styles from "./ArticleList.module.scss";
-
-gsap.registerPlugin(ScrollTrigger);
+import gsap from "gsap";
 
 interface ArticleItem {
     question: string;
     answer: string;
 }
 
-interface ArticleListProps {
+interface Props {
     data: ArticleItem[];
-    centerTitle: string;
+    centerTitle?: string;
     icon?: React.ReactNode;
 }
 
-const ArticleList: React.FC<ArticleListProps> = ({data, centerTitle, icon}) => {
-    const [openIndex, setOpenIndex] = useState<number | null>(null);
+const ArticleList: React.FC<Props> = ({data, centerTitle, icon}) => {
+    const [active, setActive] = useState<ArticleItem | null>(null);
+    const centerTitleRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement | null>(null);
-    const centerTitleRef = useRef<HTMLDivElement | null>(null);
-    const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
-
+    const answerBoxRef = useRef<HTMLDivElement | null>(null);
     useEffect(() => {
-        gsap.fromTo(centerTitleRef.current, {opacity: 0, x: 200}, {opacity: 1, x: 0, duration: 1, ease: "power3.out"})
-        if (containerRef.current) {
+        // 动画
+        if (centerTitleRef.current) {
             gsap.fromTo(
-                containerRef.current,
-                {opacity: 0, y: 80},
+                centerTitleRef.current,
+                {opacity: 0, x: 200},
                 {
                     opacity: 1,
-                    y: 0,
-                    duration: 1.2,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: containerRef.current,
-                        start: "top 85%",
-                        toggleActions: "play none none reverse"
-                    }
+                    x: 0,
+                    duration: 1,
+                    ease: "power2.out",
+                }
+            );
+        }
+
+        if (containerRef.current) {
+            const cards = containerRef.current.querySelectorAll(`.${styles.card}`);
+            gsap.fromTo(
+                cards,
+                {x: -150, opacity: 0},
+                {
+                    x: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: "elastic.out(.1,.5)",
+                    stagger: 0.1,
                 }
             );
         }
     }, []);
 
-    const toggle = (index: number) => {
-        const content = contentRefs.current[index];
-        const isOpen = openIndex === index;
+    useEffect(() => {
 
-        if (content) {
-            if (isOpen) {
-                gsap.to(content, {
-                    height: 0,
-                    opacity: 0,
-                    duration: 0.4,
-                    ease: "power2.inOut"
-                });
-                setOpenIndex(null);
-            } else {
-                gsap.set(content, {height: "auto"});
-                const height = content.scrollHeight;
-                gsap.fromTo(
-                    content,
-                    {height: 0, opacity: 0},
-                    {height, opacity: 1, duration: 0.5, ease: "power2.out"}
-                );
-                setOpenIndex(index);
+        // 键盘关闭事件
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape" && active) {
+                setActive(null);
             }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [active]);
+
+    useEffect(() => {
+        const lenis = (window as any).__lenis__;
+        console.log(lenis, 123)
+        if (active) {
+            // 停止 Lenis 滚动
+            if (lenis && lenis.stop) lenis.stop();
+
+            document.body.style.overflow = "hidden";
+            document.body.style.height = "100vh";
+
+            // 动画
+            gsap.fromTo(
+                `.${styles.overlay}`,
+                {opacity: 0},
+                {opacity: 1, duration: 0.3}
+            );
+
+            gsap.fromTo(
+                `.${styles.answerBox}`,
+                {y: 50, opacity: 0},
+                {y: 0, opacity: 1, duration: 0.4, ease: "back.out(1.7)"}
+            );
+        } else {
+            // 恢复 Lenis 滚动
+            if (lenis && lenis.start) lenis.start();
+
+            document.body.style.overflow = "";
+            document.body.style.height = "";
         }
-    };
-
+    }, [active]);
     return (
-        <>
-            <div className={styles.centerTitle} ref={centerTitleRef}>
-                {icon && <span className={styles.iconLeft}>{icon}</span>}
-                {centerTitle}
-            </div>
-            <div className={styles.articleList} ref={containerRef}>
-                {data.map((item, index) => (
-                    <div key={index} className={styles.articleItem}>
-                        <div className={styles.question} onClick={() => toggle(index)}>
-                            <span>{index + 1}. {item.question}</span>
-                            <span className={styles.icon}>{openIndex === index ? "▲" : "▼"}</span>
-                        </div>
+        <div className={styles.wrapper}>
+            {centerTitle && (
+                <div className={styles.title} ref={centerTitleRef}>
+                    {icon && <span className={styles.iconLeft}>{icon}</span>}
+                    {centerTitle}
+                </div>
+            )}
 
-                        <div
-                            className={styles.answerWrapper}
-                            ref={(el) => {
-                                contentRefs.current[index] = el;
-                            }}
-                            style={{height: 0, overflow: "hidden", opacity: 0}}
-                        >
-                            <div className={styles.answer}>
-                                <ReactMarkdown
-                                    children={item.answer}
-                                    remarkPlugins={[remarkGfm]}
-                                    rehypePlugins={[rehypeHighlight]}
-                                    // components={{
-                                    //     img: ({node, ...props}) => (
-                                    //         <img {...props} style={{maxWidth: "50%", borderRadius: 8, margin: "0 auto"}}/>
-                                    //     ),
-                                    //     table: ({node, ...props}) => (
-                                    //         <div style={{overflowX: "auto"}}>
-                                    //             <table {...props} />
-                                    //         </div>
-                                    //     )
-                                    // }}
-                                />
-                            </div>
-                        </div>
+            <div className={styles.grid} ref={containerRef}>
+                {data.map((item, index) => (
+                    <div
+                        key={index}
+                        className={styles.card}
+                        onClick={() => setActive(item)}
+                    >
+                        <span className={styles.qIndex}>{index + 1}</span>
+                        <div className={styles.qText}>{item.question}</div>
                     </div>
                 ))}
             </div>
-        </>
+
+            {active && (
+                <div className={styles.overlay} onClick={() => setActive(null)}>
+                    <div
+                        className={styles.answerBox}
+                        data-lenis-prevent
+                        onClick={(e) => e.stopPropagation()}
+                        ref={answerBoxRef}
+                    >
+                        <div className={styles.answerHeader}>
+                            <h2>{active.question}</h2>
+                            <button
+                                className={styles.closeButton}
+                                onClick={() => setActive(null)}
+                                aria-label="关闭"
+                            >
+                                &times;
+                            </button>
+                        </div>
+
+                        <div className={styles.answerContent}>
+                            <ReactMarkdown
+                                children={active.answer}
+                                remarkPlugins={[remarkGfm]}
+                                rehypePlugins={[rehypeHighlight]}
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 };
 

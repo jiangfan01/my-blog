@@ -17,6 +17,9 @@ const Layout = () => {
             smoothWheel: true,
         });
 
+        (window as any).__lenis__ = lenis;
+
+
         function raf(time: number) {
             lenis.raf(time);
             requestAnimationFrame(raf);
@@ -42,6 +45,7 @@ const Layout = () => {
 
         return () => {
             lenis.destroy();
+            (window as any).__lenis__ = null;
         };
     }, [location.pathname]);
 
