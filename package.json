@@ -12,7 +12,10 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@antv/g2plot": "^2.4.33",
     "@studio-freight/lenis": "^1.0.42",
+    "d3": "^7.9.0",
+    "d3-cloud": "^1.2.7",
     "gsap": "^3.13.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
