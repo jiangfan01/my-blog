@@ -47,7 +47,7 @@ const SkillTags = () => {
     useEffect(() => {
         if (!wrapperRef.current) return;
 
-        let tl = gsap.timeline({
+        const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: wrapperRef.current,
                 start: "top 80%", // 元素top到视口80%位置触发

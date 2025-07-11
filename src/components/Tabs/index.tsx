@@ -2,18 +2,9 @@ import React, {useRef} from "react";
 import styles from './Tabs.module.scss';
 import gsap from "gsap";
 import {
+    AiFillBook,
     AiFillHome,
 } from "react-icons/ai";
-import {
-    FaCss3Alt,
-    FaJs,
-    FaReact,
-    FaVuejs,
-    FaNodeJs,
-    FaChrome,
-    FaMobileAlt,
-    FaGitAlt
-} from "react-icons/fa";
 import {useNavigate} from "react-router-dom";
 
 const Tabs: React.FC = () => {
@@ -23,14 +14,8 @@ const Tabs: React.FC = () => {
 
     const tabList = [
         {key: "home", label: "首页", icon: <AiFillHome/>},
-        {key: "Css", label: "CSS3", icon: <FaCss3Alt/>},
-        {key: "JavaScript", label: "JavaScript", icon: <FaJs/>},
-        {key: "React", label: "React", icon: <FaReact/>},
-        {key: "Vue", label: "Vue", icon: <FaVuejs/>},
-        {key: "Node", label: "Node.js", icon: <FaNodeJs/>},
-        {key: "web", label: "浏览器", icon: <FaChrome/>},
-        {key: "ReactNative", label: "React Native", icon: <FaMobileAlt/>},
-        {key: "Git", label: "Git", icon: <FaGitAlt/>},
+        {key: "page", label: "技术文章", icon: <AiFillBook/>},
+
     ];
 
     const handleMouseEnter = (index: number) => {
@@ -68,7 +53,7 @@ const Tabs: React.FC = () => {
     const handleTabClick = (index: number) => {
         if (index === 0) {
             navigate('/home')
-        }else{
+        } else {
             navigate(`/home/articles/${tabList[index].key}`)
         }
     };
