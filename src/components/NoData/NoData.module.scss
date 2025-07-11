@@ -1,0 +1,19 @@
+.noDataContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  color: #999;
+  user-select: none;
+}
+
+.icon {
+  margin-bottom: 1rem;
+  stroke: #bbb;
+}
+
+.text {
+  font-size: 1.2rem;
+  font-weight: 500;
+}

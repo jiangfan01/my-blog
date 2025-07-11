@@ -3,7 +3,7 @@ import styles from './Tabs.module.scss';
 import gsap from "gsap";
 import {
     AiFillBook,
-    AiFillHome,
+    AiFillHome, AiFillTool,
 } from "react-icons/ai";
 import {useNavigate} from "react-router-dom";
 
@@ -13,9 +13,24 @@ const Tabs: React.FC = () => {
     const textRefs = useRef<HTMLDivElement[]>([]);
 
     const tabList = [
-        {key: "home", label: "首页", icon: <AiFillHome/>},
-        {key: "page", label: "技术文章", icon: <AiFillBook/>},
-
+        {
+            key: "home",
+            label: "首页",
+            icon: <AiFillHome />,
+            path: "/home",
+        },
+        {
+            key: "articles",
+            label: "技术文章",
+            icon: <AiFillBook />,
+            path: "/home/articles/page",
+        },
+        {
+            key: "scene",
+            label: "开发场景",
+            icon: <AiFillTool  />,
+            path: "/home/scene/page",
+        },
     ];
 
     const handleMouseEnter = (index: number) => {
@@ -51,10 +66,9 @@ const Tabs: React.FC = () => {
     };
 
     const handleTabClick = (index: number) => {
-        if (index === 0) {
-            navigate('/home')
-        } else {
-            navigate(`/home/articles/${tabList[index].key}`)
+        const selected = tabList[index];
+        if (selected?.path) {
+            navigate(selected.path);
         }
     };
 

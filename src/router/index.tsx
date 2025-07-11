@@ -1,10 +1,11 @@
-import { Route, Routes, Navigate } from "react-router-dom";
-import  { Suspense, lazy } from "react";
+import {Route, Routes, Navigate} from "react-router-dom";
+import {Suspense, lazy} from "react";
 
 // 基础页可以保留同步导入（如 404、布局页）
 import NotFound from "../pages/404/NotFound.tsx";
 import Layout from "../pages/layout";
 import Loading from "../components/Loading/Loading.tsx";
+import ScenePage from "../pages/scene/ScenePage/ScenePage.tsx";
 
 // 懒加载页面
 const Welcome = lazy(() => import("../pages/welcome"));
@@ -22,26 +23,31 @@ const ArticlesEngineering = lazy(() => import("../pages/articles/ArticlesEnginee
 
 const App = () => {
     return (
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<Loading/>}>
             <Routes>
-                <Route path="/" index element={<Navigate to="/welcome" replace />} />
-                <Route path="/welcome" element={<Welcome />} />
+                <Route path="/" index element={<Navigate to="/welcome" replace/>}/>
+                <Route path="/welcome" element={<Welcome/>}/>
 
-                <Route path="/home" element={<Layout />}>
-                    <Route index element={<Home />} />
-                    <Route path="articles/Page" element={<ArticlesPage />} />
-                    <Route path="articles/Css" element={<ArticlesCss />} />
-                    <Route path="articles/JavaScript" element={<ArticlesJavaScript />} />
-                    <Route path="articles/React" element={<ArticlesReact />} />
-                    <Route path="articles/Vue" element={<ArticlesVue />} />
-                    <Route path="articles/Node" element={<ArticlesNode />} />
-                    <Route path="articles/Web" element={<ArticlesWeb />} />
-                    <Route path="articles/ReactNative" element={<ArticlesRN />} />
-                    <Route path="articles/Git" element={<ArticlesGit />} />
-                    <Route path="articles/Engineering" element={<ArticlesEngineering />} />
+                <Route path="/home" element={<Layout/>}>
+                    <Route index element={<Home/>}/>
+
+                    {/*技术文章*/}
+                    <Route path="articles/Page" element={<ArticlesPage/>}/>
+                    <Route path="articles/Css" element={<ArticlesCss/>}/>
+                    <Route path="articles/JavaScript" element={<ArticlesJavaScript/>}/>
+                    <Route path="articles/React" element={<ArticlesReact/>}/>
+                    <Route path="articles/Vue" element={<ArticlesVue/>}/>
+                    <Route path="articles/Node" element={<ArticlesNode/>}/>
+                    <Route path="articles/Web" element={<ArticlesWeb/>}/>
+                    <Route path="articles/ReactNative" element={<ArticlesRN/>}/>
+                    <Route path="articles/Git" element={<ArticlesGit/>}/>
+                    <Route path="articles/Engineering" element={<ArticlesEngineering/>}/>
+
+                    {/*开发场景*/}
+                    <Route path="scene/Page" element={<ScenePage/>}/>
                 </Route>
 
-                <Route path="*" element={<NotFound />} />
+                <Route path="*" element={<NotFound/>}/>
             </Routes>
         </Suspense>
     );
