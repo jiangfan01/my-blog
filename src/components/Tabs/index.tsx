@@ -2,10 +2,11 @@ import React, {useRef} from "react";
 import styles from './Tabs.module.scss';
 import gsap from "gsap";
 import {
-    AiFillBook,
-    AiFillHome, AiFillTool,
+    AiFillHome,
 } from "react-icons/ai";
 import {useNavigate} from "react-router-dom";
+import {FaBookOpen, FaTools} from "react-icons/fa";
+import {GiCircuitry} from "react-icons/gi";
 
 const Tabs: React.FC = () => {
     const navigate = useNavigate();
@@ -16,20 +17,26 @@ const Tabs: React.FC = () => {
         {
             key: "home",
             label: "首页",
-            icon: <AiFillHome />,
+            icon: <AiFillHome size={22} color="#3B82F6"/>,
             path: "/home",
         },
         {
             key: "articles",
             label: "技术文章",
-            icon: <AiFillBook />,
+            icon: <FaBookOpen size={22} color="#6366F1"/>,
             path: "/home/articles/page",
         },
         {
             key: "scene",
             label: "开发场景",
-            icon: <AiFillTool  />,
+            icon: <FaTools size={22} color="#10B981"/>,
             path: "/home/scene/page",
+        },
+        {
+            key: "algorithm",
+            label: "算法专区",
+            icon: <GiCircuitry size={22} color="#F59E0B"/>,
+            path: "/home/algorithm/page",
         },
     ];
 

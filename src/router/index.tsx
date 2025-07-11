@@ -6,6 +6,7 @@ import NotFound from "../pages/404/NotFound.tsx";
 import Layout from "../pages/layout";
 import Loading from "../components/Loading/Loading.tsx";
 import ScenePage from "../pages/scene/ScenePage/ScenePage.tsx";
+import Algorithm from "../pages/algorithm";
 
 // 懒加载页面
 const Welcome = lazy(() => import("../pages/welcome"));
@@ -45,6 +46,9 @@ const App = () => {
 
                     {/*开发场景*/}
                     <Route path="scene/Page" element={<ScenePage/>}/>
+
+                    {/*    算法专区*/}
+                    <Route path="algorithm/Page" element={<Algorithm />}/>
                 </Route>
 
                 <Route path="*" element={<NotFound/>}/>

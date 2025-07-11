@@ -8,21 +8,22 @@ import styles from "./SkillTags.module.scss";
 gsap.registerPlugin(ScrollTrigger);
 
 const skillList = [
-    {name: "React", weight: 100},
-    {name: "Vue3", weight: 95},
-    {name: "TypeScript", weight: 90},
-    {name: "JavaScript", weight: 88},
-    {name: "Node.js", weight: 85},
-    {name: "Express", weight: 80},
-    {name: "Sequelize", weight: 78},
-    {name: "SCSS", weight: 75},
-    {name: "HTML5", weight: 72},
-    {name: "CSS3", weight: 70},
-    {name: "Git", weight: 68},
-    {name: "Vite", weight: 66},
-    {name: "GSAP", weight: 64},
-    {name: "Video.js", weight: 60},
-    {name: "REST API", weight: 58},
+    { name: "React", weight: Math.floor(Math.random() * 100) + 1 },
+    { name: "Vue3", weight: Math.floor(Math.random() * 100) + 1 },
+    { name: "TypeScript", weight: Math.floor(Math.random() * 100) + 1 },
+    { name: "JavaScript", weight: Math.floor(Math.random() * 100) + 1 },
+    { name: "Node.js", weight: Math.floor(Math.random() * 100) + 1 },
+    { name: "Express", weight: Math.floor(Math.random() * 100) + 1 },
+    { name: "微信小程序", weight: Math.floor(Math.random() * 100) + 1 },
+    { name: "uniAPP", weight: Math.floor(Math.random() * 100) + 1 },
+    { name: "SequelizeORM", weight: Math.floor(Math.random() * 100) + 1 },
+    { name: "SCSS/LESS", weight: Math.floor(Math.random() * 100) + 1 },
+    { name: "HTML5", weight: Math.floor(Math.random() * 100) + 1 },
+    { name: "CSS3", weight: Math.floor(Math.random() * 100) + 1 },
+    { name: "Git", weight: Math.floor(Math.random() * 100) + 1 },
+    { name: "Vite/WebPack", weight: Math.floor(Math.random() * 100) + 1 },
+    { name: "GSAP", weight: Math.floor(Math.random() * 100) + 1 },
+    { name: "REST API", weight: Math.floor(Math.random() * 100) + 1 },
 ];
 
 const SkillTags = () => {
@@ -64,7 +65,7 @@ const SkillTags = () => {
             .size([dimensions.width, dimensions.height])
             .words(skillList.map((d) => ({text: d.name, size: fontSizeScale(d.weight)})))
             .padding(10)
-            .rotate(() => 0)
+            .rotate(() => Math.random() * 15)
             .font("Verdana")
             // @ts-ignore
             .fontSize((d) => d.size)
