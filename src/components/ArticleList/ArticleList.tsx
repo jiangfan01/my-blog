@@ -71,7 +71,6 @@ const ArticleList: React.FC<Props> = ({data, centerTitle, icon}) => {
 
     useEffect(() => {
         const lenis = (window as any).__lenis__;
-        console.log(lenis, 123)
         if (active) {
             // 停止 Lenis 滚动
             if (lenis && lenis.stop) lenis.stop();

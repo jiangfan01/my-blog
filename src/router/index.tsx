@@ -7,6 +7,7 @@ import Layout from "../pages/layout";
 import Loading from "../components/Loading/Loading.tsx";
 import ScenePage from "../pages/scene/ScenePage/ScenePage.tsx";
 import Algorithm from "../pages/algorithm";
+import CategoryPage from "../pages/algorithm/CategoryPage.tsx";
 
 // 懒加载页面
 const Welcome = lazy(() => import("../pages/welcome"));
@@ -49,6 +50,7 @@ const App = () => {
 
                     {/*    算法专区*/}
                     <Route path="algorithm/Page" element={<Algorithm />}/>
+                    <Route path="algorithm/page/:category" element={<CategoryPage />} />
                 </Route>
 
                 <Route path="*" element={<NotFound/>}/>

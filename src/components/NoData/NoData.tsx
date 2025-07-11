@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import styles from "./NoData.module.scss";
 import { gsap } from "gsap";
 
-const NoData: React.FC<{ text?: string }> = ({ text = "暂无数据" }) => {
+const NoData: React.FC<{ text?: string }> = ({ text  }) => {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
