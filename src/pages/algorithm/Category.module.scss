@@ -47,14 +47,12 @@
 }
 
 .group {
+  min-height: 100vh;
   background: white;
   border-radius: 16px;
   padding: 2rem;
-  max-width: 970px;
-  margin: 0 auto;
   box-shadow: 0 10px 30px rgba(0, 0, 100, 0.05);
   border: 1px solid #eaeef5;
-  min-height: 500px; // 确保背景足够长
 }
 
 .level {
@@ -168,9 +166,10 @@
 }
 
 .list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-start;
 }
 
 .card {
@@ -186,6 +185,8 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  flex: 1;
+  max-width: 100%;
 
   &:hover {
     transform: translateY(-8px);
@@ -244,7 +245,9 @@
   font-weight: 700;
   color: #1e293b;
   margin-bottom: 1.2rem;
-  flex-grow: 1;
+  white-space: nowrap;        /* 不换行 */
+  overflow: hidden;           /* 超出隐藏 */
+  text-overflow: ellipsis;    /* 用省略号显示溢出部分 */
 }
 
 .cardTags {

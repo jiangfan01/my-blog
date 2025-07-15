@@ -5,6 +5,7 @@ import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github.css";
 import styles from "./ArticleList.module.scss";
 import gsap from "gsap";
+import BackButton from "../BackButton/BackButton.tsx";
 
 interface ArticleItem {
     question: string;
@@ -99,57 +100,60 @@ const ArticleList: React.FC<Props> = ({data, centerTitle, icon}) => {
         }
     }, [active]);
     return (
-        <div className={styles.wrapper}>
-            {centerTitle && (
-                <div className={styles.title} ref={centerTitleRef}>
-                    {icon && <span className={styles.iconLeft}>{icon}</span>}
-                    {centerTitle}
-                </div>
-            )}
-
-            <div className={styles.grid} ref={containerRef}>
-                {data.map((item, index) => (
-                    <div
-                        key={index}
-                        className={styles.card}
-                        onClick={() => setActive(item)}
-                    >
-                        <span className={styles.qIndex}>{index + 1}</span>
-                        <div className={styles.qText}>{item.question}</div>
+        <>
+            <BackButton/>
+            <div className={styles.wrapper}>
+                {centerTitle && (
+                    <div className={styles.title} ref={centerTitleRef}>
+                        {icon && <span className={styles.iconLeft}>{icon}</span>}
+                        {centerTitle}
                     </div>
-                ))}
+                )}
+
+                <div className={styles.grid} ref={containerRef}>
+                    {data.map((item, index) => (
+                        <div
+                            key={index}
+                            className={styles.card}
+                            onClick={() => setActive(item)}
+                        >
+                            <span className={styles.qIndex}>{index + 1}</span>
+                            <div className={styles.qText}>{item.question}</div>
+                        </div>
+                    ))}
+                </div>
+
+                {active && (
+                    <div className={styles.overlay} onClick={() => setActive(null)}>
+                        <div
+                            className={styles.answerBox}
+                            data-lenis-prevent
+                            onClick={(e) => e.stopPropagation()}
+                            ref={answerBoxRef}
+                        >
+                            <div className={styles.answerHeader}>
+                                <h2>{active.question}</h2>
+                                <button
+                                    className={styles.closeButton}
+                                    onClick={() => setActive(null)}
+                                    aria-label="关闭"
+                                >
+                                    &times;
+                                </button>
+                            </div>
+
+                            <div className={styles.answerContent}>
+                                <ReactMarkdown
+                                    children={active.answer}
+                                    remarkPlugins={[remarkGfm]}
+                                    rehypePlugins={[rehypeHighlight]}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
-
-            {active && (
-                <div className={styles.overlay} onClick={() => setActive(null)}>
-                    <div
-                        className={styles.answerBox}
-                        data-lenis-prevent
-                        onClick={(e) => e.stopPropagation()}
-                        ref={answerBoxRef}
-                    >
-                        <div className={styles.answerHeader}>
-                            <h2>{active.question}</h2>
-                            <button
-                                className={styles.closeButton}
-                                onClick={() => setActive(null)}
-                                aria-label="关闭"
-                            >
-                                &times;
-                            </button>
-                        </div>
-
-                        <div className={styles.answerContent}>
-                            <ReactMarkdown
-                                children={active.answer}
-                                remarkPlugins={[remarkGfm]}
-                                rehypePlugins={[rehypeHighlight]}
-                            />
-                        </div>
-                    </div>
-                </div>
-            )}
-        </div>
+        </>
     );
 };
 

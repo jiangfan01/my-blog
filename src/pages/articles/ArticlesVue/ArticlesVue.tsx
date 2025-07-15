@@ -90,9 +90,8 @@ Vue 内部使用了一个**依赖收集器 Dep**：
 
 ### ✅ 七、总结
 
-- Vue3 使用 Proxy 实现更强大的响应式系统
-- 所有读取/修改操作都被拦截并自动追踪更新
-- 开发者无需手动操作 DOM，维护视图与数据一致性
+- 本质上差异Proxy是在拦截对象的基本方法包含了对象的所有操作和函数，而defineProperty只是众多内部方法之一。
+- vue2的defineProperty有缺陷，他只能拦截现有的属性读写，而Proxy可以全面实现对象内部的所有方法的拦截
 - 一句话概括响应式原理本质上就是数据和函数关联。大致流程是vue通过数据劫持vue2通过Object.defineProperty vue3 通过proxy代理实现对数据的劫持读写，劫持到数据后收集依赖收集依赖的函数或组件产生关联，最后就是派发更新数据更新时通知被依赖的组件或者函数去更新渲染
 
 `
@@ -1148,7 +1147,85 @@ console.log(name.value); // 输出 Vue 4.0
 
 📌 **总结**：合理结合以上策略，针对项目实际情况进行性能调优，确保 Vue 应用流畅、响应迅速。
 `
+        },
+        {
+            question: "Vue 中的 h 函数",
+            answer: `
+## Vue 中的 \`h\` 函数详解
+
+---
+
+### 什么是 \`h\` 函数？
+
+\`h\` 函数全称是“hyperscript”，它是 Vue 3 渲染函数（render function）和 JSX 背后的核心。它用来手动创建 VNode（虚拟节点），从而生成组件的渲染内容。
+
+---
+
+### 为什么要用 \`h\` 函数？
+
+- Vue 3 允许你用渲染函数替代模板语法，\`h\` 是构建 VNode 的基础工具。
+- 渲染函数灵活且可编程，适合动态创建复杂结构或逻辑条件渲染。
+- \`h\` 函数提供对底层虚拟 DOM 的完全控制，便于性能优化。
+
+---
+
+### \`h\` 函数的基本用法
+
+\`\`\`js
+import { h } from 'vue';
+
+export default {
+  render() {
+    return h(
+      'div',                  // 标签名
+      { class: 'container' }, // 属性对象
+      [                       // 子节点，可以是字符串或 VNode 数组
+        h('h1', 'Hello Vue 3'),
+        h('p', 'This is rendered by h function.')
+      ]
+    );
+  }
+};
+\`\`\`
+
+---
+
+### 参数详解
+
+- **第一个参数**：字符串标签名（如 'div', 'span'），或组件对象。
+- **第二个参数**：属性对象（props/attrs），如 \`class\`、\`style\`、事件监听等。
+- **第三个参数**：子节点，可以是字符串、VNode 或数组。
+
+---
+
+### 使用场景
+
+- 动态构建组件结构。
+- 代替模板语法，进行细粒度渲染控制。
+- 在 JSX 不适用时，直接用渲染函数编写组件。
+
+---
+
+### 小贴士
+
+- Vue 3 推荐优先使用模板语法，只有在模板表达能力不足时用 \`h\`。
+- \`h\` 函数是 Vue 3 组合式 API 下的关键工具。
+- 结合 \`resolveComponent\` 和 \`withDirectives\` 可以构建更复杂的动态渲染。
+
+---
+
+### 参考文档
+
+- [Vue 3 渲染函数](https://v3.cn.vuejs.org/guide/render-function.html)
+- [Vue 源码中的 \`h\` 函数实现](https://github.com/vuejs/vue-next/blob/master/packages/runtime-core/src/h.ts)
+
+---
+
+📌 **总结**：  
+\`h\` 函数是 Vue 3 渲染函数的核心，灵活且强大，掌握它能帮你深入理解 Vue 的渲染机制，并应对复杂的动态渲染场景。
+`
         }
+
 
 
 

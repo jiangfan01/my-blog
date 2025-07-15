@@ -1,17 +1,18 @@
 // CategoryPage.tsx
-import React, { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
-import { type Question, questions } from "./Data/questions";
+import React, {useState, useEffect, useRef} from "react";
+import {useParams} from "react-router-dom";
+import {type Question, questions} from "./Data/questions";
 import QuestionModal from "../../components/Algorithm/QuestionModal";
 import NoData from "../../components/NoData/NoData";
 import styles from "./Category.module.scss";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
+import BackButton from "../../components/BackButton/BackButton.tsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const CategoryPage: React.FC = () => {
-    const { category } = useParams();
+    const {category} = useParams();
     const filtered = questions.filter((q) => q.category === category);
     const [activeQuestion, setActiveQuestion] = useState<Question | null>(null);
     const [activeDifficulty, setActiveDifficulty] = useState<"简单" | "中等" | "困难" | "全部">("全部");
@@ -40,11 +41,24 @@ const CategoryPage: React.FC = () => {
     const headerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape" && activeQuestion) {
+                setActiveQuestion(null);
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [activeQuestion]);
+
+    useEffect(() => {
         // 标题动画
         if (headerRef.current) {
             gsap.fromTo(
                 headerRef.current,
-                { opacity: 0, y: -30 },
+                {opacity: 0, y: -30},
                 {
                     opacity: 1,
                     y: 0,
@@ -62,7 +76,7 @@ const CategoryPage: React.FC = () => {
         // 难度切换按钮动画
         gsap.fromTo(
             `.${styles.difficultyTabs} button`,
-            { opacity: 0, y: 20 },
+            {opacity: 0, y: 20},
             {
                 opacity: 1,
                 y: 0,
@@ -81,7 +95,7 @@ const CategoryPage: React.FC = () => {
         if (cards.length) {
             gsap.fromTo(
                 cards,
-                { opacity: 0, y: 30 },
+                {opacity: 0, y: 30},
                 {
                     opacity: 1,
                     y: 0,
@@ -101,6 +115,8 @@ const CategoryPage: React.FC = () => {
         };
     }, [activeDifficulty]);
 
+
+
     const renderCardContent = (q: Question) => (
         <>
             <div className={styles.cardHeader}>
@@ -112,88 +128,91 @@ const CategoryPage: React.FC = () => {
     );
 
     return (
-        <div className={styles.container}>
-            <div className={styles.header} ref={headerRef}>
-                <h2 className={styles.title}>
-                    <span className={styles.categoryIcon}>📚</span>
-                    {category} 类题目
-                    <span className={styles.badge}>{allQuestions.length}题</span>
-                </h2>
-                <p className={styles.subtitle}>按难度分类浏览题目，点击卡片查看详情</p>
-            </div>
-
-            {/* 难度选择标签 */}
-            <div className={styles.difficultyTabs}>
-                {(["全部", "简单", "中等", "困难"] as const).map((level) => (
-                    <button
-                        key={level}
-                        className={`${styles.tab} ${activeDifficulty === level ? styles.active : ''}`}
-                        onClick={() => setActiveDifficulty(level)}
-                        data-difficulty={level}
-                    >
-                        {level}
-                        <span className={styles.count}>{difficultyCounts[level]}</span>
-                    </button>
-                ))}
-            </div>
-
-            {/* 题目列表 */}
-            {activeDifficulty === "全部" ? (
-                <div className={styles.group}>
-                    <h3 className={`${styles.level} ${styles.全部}`}>
-                        全部题目
-                        <span className={styles.levelCount}>{allQuestions.length}题</span>
-                    </h3>
-                    <div className={styles.list}>
-                        {allQuestions.length === 0 ? (
-                            <NoData text="暂无题目"/>
-                        ) : (
-                            allQuestions.map((q) => (
-                                <div
-                                    key={q.id}
-                                    className={`${styles.card} ${styles[q.difficulty]}`}
-                                    onClick={() => setActiveQuestion(q)}
-                                >
-                                    {renderCardContent(q)}
-                                </div>
-                            ))
-                        )}
-                    </div>
+        <>
+            <BackButton/>
+            <div className={styles.container}>
+                <div className={styles.header} ref={headerRef}>
+                    <h2 className={styles.title}>
+                        <span className={styles.categoryIcon}>📚</span>
+                        {category} 类题目
+                        <span className={styles.badge}>{allQuestions.length}题</span>
+                    </h2>
+                    <p className={styles.subtitle}>按难度分类浏览题目，点击卡片查看详情</p>
                 </div>
-            ) : (
-                <div className={styles.group}>
-                    <h3 className={`${styles.level} ${styles[activeDifficulty]}`}>
-                        {activeDifficulty}题目
-                        <span className={styles.levelCount}>{difficultyCounts[activeDifficulty]}题</span>
-                    </h3>
-                    <div className={styles.list}>
-                        {getFilteredQuestions().length === 0 ? (
-                            <NoData text={`暂无${activeDifficulty}难度的题目`}/>
-                        ) : (
-                            getFilteredQuestions().map((q) => (
-                                <div
-                                    key={q.id}
-                                    className={`${styles.card} ${styles[q.difficulty]}`}
-                                    onClick={() => setActiveQuestion(q)}
-                                >
-                                    {renderCardContent(q)}
-                                </div>
-                            ))
-                        )}
-                    </div>
-                </div>
-            )}
 
-            {activeQuestion && (
-                <QuestionModal
-                    question={{
-                        ...activeQuestion,
-                        answer: activeQuestion.answer || "暂无答案"
-                    }}
-                    onClose={() => setActiveQuestion(null)}
-                />
-            )}
-        </div>
+                {/* 难度选择标签 */}
+                <div className={styles.difficultyTabs}>
+                    {(["全部", "简单", "中等", "困难"] as const).map((level) => (
+                        <button
+                            key={level}
+                            className={`${styles.tab} ${activeDifficulty === level ? styles.active : ''}`}
+                            onClick={() => setActiveDifficulty(level)}
+                            data-difficulty={level}
+                        >
+                            {level}
+                            <span className={styles.count}>{difficultyCounts[level]}</span>
+                        </button>
+                    ))}
+                </div>
+
+                {/* 题目列表 */}
+                {activeDifficulty === "全部" ? (
+                    <div className={styles.group}>
+                        <h3 className={`${styles.level} ${styles.全部}`}>
+                            全部题目
+                            <span className={styles.levelCount}>{allQuestions.length}题</span>
+                        </h3>
+                        <div className={styles.list}>
+                            {allQuestions.length === 0 ? (
+                                <NoData text="暂无题目"/>
+                            ) : (
+                                allQuestions.map((q) => (
+                                    <div
+                                        key={q.id}
+                                        className={`${styles.card} ${styles[q.difficulty]}`}
+                                        onClick={() => setActiveQuestion(q)}
+                                    >
+                                        {renderCardContent(q)}
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    </div>
+                ) : (
+                    <div className={styles.group}>
+                        <h3 className={`${styles.level} ${styles[activeDifficulty]}`}>
+                            {activeDifficulty}题目
+                            <span className={styles.levelCount}>{difficultyCounts[activeDifficulty]}题</span>
+                        </h3>
+                        <div className={styles.list}>
+                            {getFilteredQuestions().length === 0 ? (
+                                <NoData text={`暂无${activeDifficulty}难度的题目`}/>
+                            ) : (
+                                getFilteredQuestions().map((q) => (
+                                    <div
+                                        key={q.id}
+                                        className={`${styles.card} ${styles[q.difficulty]}`}
+                                        onClick={() => setActiveQuestion(q)}
+                                    >
+                                        {renderCardContent(q)}
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    </div>
+                )}
+
+                {activeQuestion && (
+                    <QuestionModal
+                        question={{
+                            ...activeQuestion,
+                            answer: activeQuestion.answer || "暂无答案"
+                        }}
+                        onClose={() => setActiveQuestion(null)}
+                    />
+                )}
+            </div>
+        </>
     );
 };
 

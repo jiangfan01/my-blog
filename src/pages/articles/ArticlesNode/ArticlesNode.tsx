@@ -799,8 +799,126 @@ model User {
 
 > 📌 ORM 是解放双手的利器，但**在性能或复杂 SQL 查询场景下，也可搭配使用原生 SQL** 灵活应对。
 `
-        }
+        },
+        {
+            question: "Node 模块化标准",
+            answer: `
+## Node.js 模块化标准详解：CommonJS vs ESModule 
+## Node.js 支持哪些模块化标准？有什么区别？我在项目中应该选哪一种？
 
+这是前后端通吃的必备基础知识，尤其在使用模块系统构建工具（如 Vite、Webpack）或写 Node 服务时非常重要。
+---
+
+### 🧱 一、CommonJS（CJS）
+
+#### ✅ 特点：
+- Node.js 默认支持的模块系统（无需配置）
+- 使用 \`require\` 引入模块
+- 使用 \`module.exports\` 或 \`exports\` 导出模块
+- **同步加载**（适合服务端执行环境）
+
+#### ✅ 示例：
+
+\`\`\`js
+// math.js
+function add(a, b) {
+  return a + b;
+}
+module.exports = { add };
+\`\`\`
+
+\`\`\`js
+// index.js
+const math = require('./math');
+console.log(math.add(2, 3)); // 输出 5
+\`\`\`
+
+---
+
+### 🌍 二、ESModule（ESM）
+
+#### ✅ 特点：
+- JavaScript 官方模块系统（ES6 标准）
+- 使用 \`import\` / \`export\` 语法
+- **异步加载**（支持静态分析，利于 Tree Shaking）
+- 在 Node.js 中使用，需要显式启用：
+
+  - 文件后缀为 \`.mjs\`，或
+  - 在 \`package.json\` 中加入 \`"type": "module"\`
+
+#### ✅ 示例：
+
+\`\`\`js
+// math.mjs
+export function add(a, b) {
+  return a + b;
+}
+\`\`\`
+
+\`\`\`js
+// index.mjs
+import { add } from './math.mjs';
+console.log(add(2, 3)); // 输出 5
+\`\`\`
+
+---
+
+### 🔁 对比总结表
+
+| 对比项        | CommonJS (CJS)          | ESModule (ESM)         |
+|---------------|--------------------------|--------------------------|
+| 引入方式      | \`require()\`             | \`import\`               |
+| 导出方式      | \`module.exports\`        | \`export / export default\` |
+| 加载方式      | 同步                     | 异步                     |
+| 文件扩展名    | \`.js\`、\`.cjs\`           | \`.mjs\`，或配置 \`"type"\`   |
+| 是否支持顶层 await | ❌ 否                  | ✅ 支持                   |
+| 是否浏览器兼容 | ❌ 否                     | ✅ 是                    |
+
+---
+
+### 🧪 三、实际项目中该怎么选？
+
+| 场景                              | 推荐使用            |
+|-----------------------------------|---------------------|
+| 传统 Node.js 项目                 | CommonJS            |
+| 前端 / Node 全用 ESModule 的项目  | ESModule            |
+| 开源包开发（要适配多环境）        | 同时支持 CJS + ESM  |
+| Vite / Rollup 等现代构建工具配合   | ESM（更好优化）      |
+
+---
+
+### 🎯 四、如何启用 ESModule？
+
+1. 在 \`package.json\` 中声明：
+
+\`\`\`json
+{
+  "type": "module"
+}
+\`\`\`
+
+2. 或者将文件改为 .mjs 后缀。
+
+---
+
+### 📌 五、模块混用限制
+
+- **CJS 中引入 ESM**：只能用动态 \`import()\`，不能用 \`require()\`
+- **ESM 中引入 CJS**：可以使用 \`import xxx from 'cjs模块'\`
+
+---
+
+### ✅ 小结
+
+- **CommonJS 是 Node 默认的老牌模块系统**
+- **ESModule 是现代推荐方式，更适合前后端统一**
+- 在项目中选哪种模块，取决于你的环境需求与工具链支持
+- **Node 默认使用 CommonJS 模块化规范，采用同步加载，使用 require 和 module.exports；而现代前端多采用支持异步的 ESModule（import / export），Node 也支持它，但需额外配置**
+
+
+---
+`
+        }
 
 
 
