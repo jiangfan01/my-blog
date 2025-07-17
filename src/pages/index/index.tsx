@@ -14,4 +14,4 @@ const Home: React.FC = () => {
         </div>
     )
 }
-export default Home;
+export default React.memo(Home);

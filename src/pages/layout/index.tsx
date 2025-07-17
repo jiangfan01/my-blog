@@ -10,7 +10,10 @@ import {Outlet, useLocation} from "react-router-dom";
 const Layout = () => {
 
     const tabsRef = useRef<HTMLDivElement>(null);
+
     const location = useLocation();
+
+    // 注册lenis及动画
     useEffect(() => {
         const lenis = new Lenis({
             duration: 1,
@@ -31,13 +34,13 @@ const Layout = () => {
         gsap.fromTo(
             tabsRef.current,
             {
-                y: 100,
+                y: 50,
                 opacity: 0,
             },
             {
                 y: 0,
                 opacity: 1,
-                duration: 1,
+                duration: .5,
                 ease: "power3.out",
                 delay: 0.3
             }
@@ -49,12 +52,13 @@ const Layout = () => {
         };
     }, [location.pathname]);
 
+
     return (
         <>
             <div ref={tabsRef} className={styles.tabsWrapper}>
                 <Tabs/>
             </div>
-            <main style={{paddingTop: "10vh",paddingBottom:"10vh", minHeight: 'calc(100vh - 50px)'}}>
+            <main style={{paddingTop: "10vh", paddingBottom: "10vh", minHeight: 'calc(100vh - 50px)'}}>
                 <Outlet/>
             </main>
             <Footer/>

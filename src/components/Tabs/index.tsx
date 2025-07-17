@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {useContext, useMemo, useRef} from "react";
 import styles from './Tabs.module.scss';
 import gsap from "gsap";
 import {
@@ -7,12 +7,17 @@ import {
 import {useNavigate} from "react-router-dom";
 import {FaBookOpen, FaTools} from "react-icons/fa";
 import {GiCircuitry} from "react-icons/gi";
+import {ThemeContext} from "../../config/theme.ts";
+import {throttle} from "../../utils/throttle.ts";
 
 const Tabs: React.FC = () => {
     const navigate = useNavigate();
     const underlineRefs = useRef<HTMLDivElement[]>([]);
     const textRefs = useRef<HTMLDivElement[]>([]);
-
+    const {theme, toggleTheme} = useContext(ThemeContext)
+    const throttledToggle = useMemo(() => throttle(() => {
+        toggleTheme();
+    }, 800), [toggleTheme]);
     const tabList = [
         {
             key: "home",
@@ -48,9 +53,8 @@ const Tabs: React.FC = () => {
             ease: "power2.out"
         });
         gsap.to(textRefs.current[index], {
-            color: "#0071e3",
             y: -2,
-            duration: 0.3,
+            duration: 0.1,
             ease: "power2.out"
         });
 
@@ -64,20 +68,19 @@ const Tabs: React.FC = () => {
             ease: "power2.in"
         });
         gsap.to(textRefs.current[index], {
-            color: "#000",
             y: 0,
-            duration: 0.3,
+            duration: 0.1,
             ease: "power2.in"
         });
 
     };
-
     const handleTabClick = (index: number) => {
         const selected = tabList[index];
         if (selected?.path) {
             navigate(selected.path);
         }
     };
+
 
     return (
         <div className={styles.tabs}>
@@ -106,8 +109,11 @@ const Tabs: React.FC = () => {
                     />
                 </div>
             ))}
+            <button onClick={() => throttledToggle()} className={styles.themeToggleBtn}>
+                切换主题（{theme === 'light' ? '🌞' : '🌙'}）
+            </button>
         </div>
     );
 };
 
-export default Tabs;
+export default React.memo(Tabs);

@@ -49,8 +49,8 @@ const App = () => {
                     <Route path="scene/Page" element={<ScenePage/>}/>
 
                     {/*    算法专区*/}
-                    <Route path="algorithm/Page" element={<Algorithm />}/>
-                    <Route path="algorithm/page/:category" element={<CategoryPage />} />
+                    <Route path="algorithm/Page" element={<Algorithm/>}/>
+                    <Route path="algorithm/page/:category" element={<CategoryPage/>}/>
                 </Route>
 
                 <Route path="*" element={<NotFound/>}/>

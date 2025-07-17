@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, {useEffect, useRef} from "react";
 import styles from "./Nutshell.module.scss";
 import gsap from "gsap";
 
@@ -14,7 +14,7 @@ const Nutshell: React.FC = () => {
                 if (entry.isIntersecting) {
                     gsap.fromTo(
                         textRef.current,
-                        { opacity: 0, y: 20 },
+                        {opacity: 0, y: 20},
                         {
                             opacity: 1,
                             y: 0,
@@ -56,4 +56,4 @@ const Nutshell: React.FC = () => {
     );
 };
 
-export default Nutshell;
+export default React.memo(Nutshell);

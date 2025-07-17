@@ -2,6 +2,9 @@
   padding: 2rem;
   max-width: 650px;
   margin: 0 auto;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .title {
@@ -9,7 +12,8 @@
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 2rem;
-  color: #333;
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
 .grid {
@@ -23,32 +27,43 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.2rem 1.6rem;
-  background: #ffffff;
+  background: var(--secondary-color);
   border-radius: 0.75rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  border-left: 6px solid #0071e3;
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  border-left: 6px solid var(--primary-color);
+  transition:
+          background 0.3s ease,
+          box-shadow 0.3s ease,
+          transform 0.3s ease,
+          border-left-color 0.3s ease;
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  color: var(--text-color);
+}
 
-  &:hover {
-    transform: translateY(-2px);
-    background: linear-gradient(135deg, #f0f9ff, #e6f7ff);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  }
+.card:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(
+                  135deg,
+                  var(--secondary-color),
+                  rgba(0, 120, 255, 0.1)
+  );
+  box-shadow: 0 8px 24px var(--shadow-color);
 }
 
 .label {
   font-size: 1.15rem;
   font-weight: 600;
-  color: #333;
+  color: var(--text-color);
   flex: 1;
+  transition: color 0.3s ease;
 }
 
 .card::before {
-  content: \"📂\";
+  content: "📂";
   margin-right: 1rem;
   font-size: 1.4rem;
-  color: #0071e3;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
 }

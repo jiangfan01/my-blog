@@ -8,7 +8,8 @@
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
   font-weight: bold;
-  color: #333;
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
 .grid {
@@ -18,34 +19,39 @@
 }
 
 .card {
-  background: #ffffff;
-  border: 1px solid #eaeaea;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
   border-radius: 24px;
   padding: 2.5rem;
   text-align: center;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.3s ease, transform 0.3s ease;
 
   &:hover {
-    transform: translateY(-6px) scale(1.5);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-6px) scale(1.05);
+    box-shadow: 0 8px 20px var(--shadow-color);
   }
 }
 
 .icon {
   font-size: 2rem;
   margin-bottom: 0.5rem;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
 }
 
 .label {
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.3rem;
-  color: #222;
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
 .desc {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--text-color);
+  opacity: 0.7;
+  transition: color 0.3s ease, opacity 0.3s ease;
 }

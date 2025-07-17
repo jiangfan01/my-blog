@@ -1,32 +1,22 @@
-// ============ 全局变量 ============ //
+@import "./themes/light";
+@import "./themes/dark";
+
 $bg-color: #f9f9f9; // 主背景：温柔的浅灰白
 $card-bg: rgba(255, 255, 255, 0.7); // 卡片背景：玻璃白 + 半透明
 $glass-blur: blur(16px);
-$text-color: #222; // 主文字：深灰更护眼
 $text-muted: #666; // 次级文字
 $border-radius: 12px;
 $shadow: 0 4px 24px rgba(0, 0, 0, 0.06); // 柔和阴影
-
 $scrollbar-thumb: rgba(0, 0, 0, 0.12);
 $scrollbar-thumb-hover: rgba(0, 0, 0, 0.25);
-
-
-// ============ 全局基础样式 ============ //
-:root {
-  --primary-bg: #0f0f0f;
-  --secondary-bg: #1a1a1a;
-  --text-color: #f0f0f0;
-  --accent-color: #ff5e5e;
-  --scrollbar-width: 6px;
-}
 html,
 body {
   margin: 0;
   padding: 0;
-  background: $bg-color;
-  color: $text-color;
   height: 100%;
   -webkit-font-smoothing: antialiased;
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease;
 }
 
 // ============ 玻璃风卡片类 ============ //

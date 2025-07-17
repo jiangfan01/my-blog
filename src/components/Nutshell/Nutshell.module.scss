@@ -3,7 +3,7 @@
   margin: 40px auto 20px;
   backdrop-filter: blur(8px);
   border-radius: 12px;
-  color: black;
+  color: var(--text-color);
   line-height: 1.8;
   transition: all 0.3s;
   font-size: 130%;
@@ -11,6 +11,7 @@
   p {
     margin: 0;
     text-indent: 2em;
+
     strong {
       color: #0071e3;
       font-weight: 600;

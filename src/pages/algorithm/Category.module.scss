@@ -1,10 +1,15 @@
+/* 容器及字体 */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1.5rem;
   font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* 头部居中 */
 .header {
   text-align: center;
   margin-bottom: 2.5rem;
@@ -12,10 +17,11 @@
   padding: 0 1rem;
 }
 
+/* 标题 */
 .title {
   font-size: 2.4rem;
   font-weight: 700;
-  color: #2c3e50;
+  color: var(--text-color);
   margin-bottom: 0.8rem;
   display: flex;
   align-items: center;
@@ -24,10 +30,12 @@
 
   .categoryIcon {
     font-size: 2.2rem;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
   }
 
   .badge {
-    background: #4361ee;
+    background: var(--primary-color);
     color: white;
     font-size: 1.1rem;
     padding: 0.25rem 0.8rem;
@@ -38,40 +46,47 @@
   }
 }
 
+/* 副标题 */
 .subtitle {
   font-size: 1.1rem;
-  color: #6c757d;
+  color: var(--text-color-secondary, #6c757d);
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
+  transition: color 0.3s ease;
 }
 
+/* 内容区块 */
 .group {
   min-height: 100vh;
-  background: white;
+  background: var(--card-bg);
   border-radius: 16px;
   padding: 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 100, 0.05);
-  border: 1px solid #eaeef5;
+  box-shadow: 0 10px 30px var(--shadow-color);
+  border: 1px solid var(--border-color);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* 难度标题 */
 .level {
   font-size: 1.6rem;
   font-weight: 700;
   margin-bottom: 1.8rem;
   padding-bottom: 0.8rem;
-  border-bottom: 2px solid #eaeef5;
+  border-bottom: 2px solid var(--border-color);
   display: flex;
   align-items: center;
+  color: var(--text-color);
 
   .levelCount {
     margin-left: 0.8rem;
-    background: #f0f4ff;
-    color: #4361ee;
+    background: var(--secondary-color);
+    color: var(--primary-color);
     font-size: 1.1rem;
     padding: 0.2rem 0.8rem;
     border-radius: 12px;
     font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   &.简单 {
@@ -90,6 +105,7 @@
   }
 }
 
+/* 难度筛选Tab */
 .difficultyTabs {
   display: flex;
   justify-content: center;
@@ -106,9 +122,9 @@
     transition: all 0.3s ease;
     position: relative;
     border: none;
-    background: white;
-    color: #4b5563;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    background: var(--card-bg);
+    color: var(--text-color-secondary, #4b5563);
+    box-shadow: 0 4px 12px var(--shadow-color);
     display: flex;
     align-items: center;
     gap: 0.6rem;
@@ -123,27 +139,37 @@
       border-radius: 50px;
       z-index: -1;
       opacity: 0.1;
+      background: var(--primary-color);
+      transition: background 0.3s ease;
     }
 
     .count {
-      background: #f0f4ff;
-      color: #4361ee;
+      background: var(--secondary-color);
+      color: var(--primary-color);
       padding: 0.1rem 0.6rem;
       border-radius: 12px;
       font-size: 0.9rem;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     &:hover {
       transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 6px 16px var(--shadow-color);
+      background: var(--secondary-color);
+      color: var(--primary-color);
+
+      .count {
+        background: var(--primary-color);
+        color: var(--text-color);
+      }
     }
 
     &.active {
-      color: white;
+      color: var(--text-color);
 
       .count {
-        background: rgba(255, 255, 255, 0.2);
-        color: white;
+        background: rgba(255 255 255 / 0.2);
+        color: var(--text-color);
       }
 
       &[data-difficulty="简单"] {
@@ -159,12 +185,13 @@
       }
 
       &[data-difficulty="全部"] {
-        background: #4361ee;
+        background: var(--primary-color);
       }
     }
   }
 }
 
+/* 题目列表 */
 .list {
   display: flex;
   flex-wrap: wrap;
@@ -172,11 +199,12 @@
   justify-content: flex-start;
 }
 
+/* 单个题目卡片 */
 .card {
-  background: #ffffff;
+  background: var(--card-bg);
   border-radius: 16px;
   padding: 1.8rem;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 6px 24px var(--shadow-color);
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
@@ -185,14 +213,15 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  //flex: 1;
   max-width: 100%;
-  flex: 0 0 calc(20% - 0.8rem); /* 考虑到 gap 是 1rem，每个项目之间的间距是 1rem，所以减去部分 */
+  flex: 0 0 calc(20% - 0.8rem);
   box-sizing: border-box;
+  color: var(--text-color);
 
   &:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 12px 32px var(--shadow-color);
+    background: var(--secondary-color);
   }
 
   &.简单 {
@@ -208,12 +237,14 @@
   }
 }
 
+/* 卡片头部 */
 .cardHeader {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.2rem;
 }
 
+/* 难度标签 */
 .difficultyTag {
   font-size: 0.85rem;
   font-weight: 600;
@@ -236,52 +267,63 @@
   }
 }
 
+/* 题目编号 */
 .questionId {
   font-size: 0.9rem;
-  color: #94a3b8;
+  color: var(--text-color-secondary, #94a3b8);
   font-weight: 500;
+  transition: color 0.3s ease;
 }
 
+/* 卡片标题 */
 .cardTitle {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--text-color);
   margin-bottom: 1.2rem;
   white-space: nowrap;        /* 不换行 */
   overflow: hidden;           /* 超出隐藏 */
   text-overflow: ellipsis;    /* 用省略号显示溢出部分 */
+  transition: color 0.3s ease;
 }
 
+/* 标签容器 */
 .cardTags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
   margin-bottom: 1.5rem;
-
-  .tag {
-    font-size: 0.8rem;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    background: #f1f5f9;
-    color: #64748b;
-  }
 }
 
+/* 标签 */
+.cardTags .tag {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  background: var(--secondary-color);
+  color: var(--text-color-secondary, #64748b);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* 卡片底部 */
 .cardFooter {
   display: flex;
   justify-content: space-between;
   font-size: 0.9rem;
-  color: #64748b;
+  color: var(--text-color-secondary, #64748b);
   padding-top: 1rem;
-  border-top: 1px solid #f1f5f9;
-
-  .stats {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-  }
+  border-top: 1px solid var(--border-color);
+  transition: color 0.3s ease, border-color 0.3s ease;
 }
 
+/* 底部统计数据 */
+.cardFooter .stats {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* 响应式适配 */
 @media (max-width: 768px) {
   .container {
     padding: 1.5rem 1rem;
@@ -310,12 +352,13 @@
   }
 
   .list {
-    grid-template-columns: 1fr;
     gap: 1.2rem;
+    justify-content: center;
   }
 
   .card {
     padding: 1.5rem;
+    flex: 0 0 calc(45% - 0.6rem);
   }
 }
 
@@ -324,14 +367,16 @@
     font-size: 1.7rem;
   }
 
-  .difficultyTabs {
-    .tab {
-      padding: 0.5rem 0.9rem;
-      font-size: 0.9rem;
-    }
+  .difficultyTabs .tab {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.9rem;
   }
 
   .level {
     font-size: 1.4rem;
+  }
+
+  .card {
+    flex: 0 0 100%;
   }
 }

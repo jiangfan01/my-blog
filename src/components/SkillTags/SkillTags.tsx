@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import * as d3 from "d3";
 import cloud from "d3-cloud";
 import {gsap} from "gsap";
@@ -7,23 +7,23 @@ import styles from "./SkillTags.module.scss";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const skillList = [
-    { name: "React", weight: Math.floor(Math.random() * 100) + 1 },
-    { name: "Vue3", weight: Math.floor(Math.random() * 100) + 1 },
-    { name: "TypeScript", weight: Math.floor(Math.random() * 100) + 1 },
-    { name: "JavaScript", weight: Math.floor(Math.random() * 100) + 1 },
-    { name: "Node.js", weight: Math.floor(Math.random() * 100) + 1 },
-    { name: "Express", weight: Math.floor(Math.random() * 100) + 1 },
-    { name: "微信小程序", weight: Math.floor(Math.random() * 100) + 1 },
-    { name: "uniAPP", weight: Math.floor(Math.random() * 100) + 1 },
-    { name: "SequelizeORM", weight: Math.floor(Math.random() * 100) + 1 },
-    { name: "SCSS/LESS", weight: Math.floor(Math.random() * 100) + 1 },
-    { name: "HTML5", weight: Math.floor(Math.random() * 100) + 1 },
-    { name: "CSS3", weight: Math.floor(Math.random() * 100) + 1 },
-    { name: "Git", weight: Math.floor(Math.random() * 100) + 1 },
-    { name: "Vite/WebPack", weight: Math.floor(Math.random() * 100) + 1 },
-    { name: "GSAP", weight: Math.floor(Math.random() * 100) + 1 },
-    { name: "REST API", weight: Math.floor(Math.random() * 100) + 1 },
+const skillList= [
+    {name: "React", weight: Math.floor(Math.random() * 100) + 1},
+    {name: "Vue3", weight: Math.floor(Math.random() * 100) + 1},
+    {name: "TypeScript", weight: Math.floor(Math.random() * 100) + 1},
+    {name: "JavaScript", weight: Math.floor(Math.random() * 100) + 1},
+    {name: "Node.js", weight: Math.floor(Math.random() * 100) + 1},
+    {name: "Express", weight: Math.floor(Math.random() * 100) + 1},
+    {name: "微信小程序", weight: Math.floor(Math.random() * 100) + 1},
+    {name: "uniAPP", weight: Math.floor(Math.random() * 100) + 1},
+    {name: "SequelizeORM", weight: Math.floor(Math.random() * 100) + 1},
+    {name: "SCSS/LESS", weight: Math.floor(Math.random() * 100) + 1},
+    {name: "HTML5", weight: Math.floor(Math.random() * 100) + 1},
+    {name: "CSS3", weight: Math.floor(Math.random() * 100) + 1},
+    {name: "Git", weight: Math.floor(Math.random() * 100) + 1},
+    {name: "Vite/WebPack", weight: Math.floor(Math.random() * 100) + 1},
+    {name: "GSAP", weight: Math.floor(Math.random() * 100) + 1},
+    {name: "REST API", weight: Math.floor(Math.random() * 100) + 1},
 ];
 
 const SkillTags = () => {
@@ -150,4 +150,4 @@ const SkillTags = () => {
     );
 };
 
-export default SkillTags;
+export default React.memo(SkillTags);
