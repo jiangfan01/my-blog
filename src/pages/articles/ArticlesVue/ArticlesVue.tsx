@@ -1181,7 +1181,7 @@ export default {
       { class: 'container' }, // 属性对象
       [                       // 子节点，可以是字符串或 VNode 数组
         h('h1', 'Hello Vue 3'),
-        h('p', 'This is rendered by h function.')
+        h('p', '这个渲染是h函数制造.')
       ]
     );
   }
@@ -1225,13 +1225,6 @@ export default {
 \`h\` 函数是 Vue 3 渲染函数的核心，灵活且强大，掌握它能帮你深入理解 Vue 的渲染机制，并应对复杂的动态渲染场景。
 `
         }
-
-
-
-
-
-
-
     ]
     return (
         <>
