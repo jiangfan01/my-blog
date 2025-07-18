@@ -1,0 +1,390 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text-color);
+  background: var(--bg-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: 6rem 0 4rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+
+  .headerTitle {
+    max-width: 800px;
+    margin: 0 auto;
+
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.5px;
+      color: var(--text-color);
+    }
+
+    p {
+      font-size: 1.4rem;
+      line-height: 1.6;
+      color: var(--text-color);
+      opacity: 0.8;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+  }
+}
+
+.section {
+  padding: 4rem 0;
+  flex: 1;
+}
+
+.contentCard {
+  margin-bottom: 5rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--border-color);
+
+  h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 2.5rem;
+    color: var(--text-color);
+    letter-spacing: -0.3px;
+  }
+}
+
+.cardContent {
+  .textBlock {
+    margin-bottom: 2.5rem;
+
+    h3 {
+      font-size: 1.8rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: var(--text-color);
+      opacity: 0.9;
+      max-width: 800px;
+    }
+  }
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+
+  .featureCard {
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 18px;
+    box-shadow: 0 8px 30px var(--shadow-color);
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    .featureIcon {
+      font-size: 2.5rem;
+      margin-bottom: 1.2rem;
+    }
+
+    h4 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+      color: var(--text-color);
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: var(--text-color);
+      opacity: 0.8;
+    }
+  }
+}
+
+.installSteps {
+  .step {
+    display: flex;
+    margin-bottom: 2.5rem;
+
+    .stepNumber {
+      width: 40px;
+      height: 40px;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-right: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .stepContent {
+      h3 {
+        font-size: 1.4rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+        color: var(--text-color);
+      }
+    }
+  }
+}
+
+.codeBlock {
+  background: var(--code-bg);
+  color: var(--code-text);
+  padding: 1.5rem;
+  border-radius: 12px;
+  font-family: 'SF Mono', Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
+}
+
+.timelineExplanation {
+  p {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 800px;
+  }
+
+  .codeExample {
+    margin: 2.5rem 0;
+  }
+
+  .bestPractices {
+    margin-top: 2.5rem;
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1.2rem;
+      color: var(--text-color);
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+
+      li {
+        padding: 0.8rem 0;
+        font-size: 1.15rem;
+        display: flex;
+        align-items: flex-start;
+
+        &::before {
+          content: "•";
+          color: var(--primary-color);
+          font-weight: bold;
+          font-size: 1.5rem;
+          margin-right: 0.8rem;
+        }
+      }
+    }
+  }
+}
+
+.demoArea {
+  margin-bottom: 3.5rem;
+
+  h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    color: var(--text-color);
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.8;
+  }
+}
+
+.demoContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.demoBox {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 40px var(--shadow-color);
+  transition: transform 0.3s ease;
+
+  .boxContent {
+    .boxIcon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    h4 {
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
+      color: var(--text-color);
+    }
+
+    p {
+      font-size: 1.15rem;
+      opacity: 0.8;
+      line-height: 1.6;
+    }
+  }
+}
+
+.codeImplementation {
+  h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+  }
+}
+
+.codeNotes {
+  margin-top: 2rem;
+
+  h4 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      padding: 0.5rem 0;
+      font-size: 1.15rem;
+      display: flex;
+      align-items: flex-start;
+
+      &::before {
+        content: "→";
+        color: var(--primary-color);
+        margin-right: 0.8rem;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.footer {
+  padding: 3rem 0;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.footerContent {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.footerLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  color: var(--primary-color);
+}
+
+.logoText {
+  margin-left: 0.8rem;
+  font-weight: 700;
+}
+
+.footerText {
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+}
+
+.footerLinks {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 1.5rem 0;
+}
+
+.footerLink {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
+}
+
+.gsapCard {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.07);
+  margin: 2.5rem 0 0 0;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  transition: box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.gsapCardTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1769fa;
+  margin-bottom: 1.1rem;
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 4rem 0 3rem;
+
+    .headerTitle {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  .contentCard {
+    margin-bottom: 4rem;
+
+    h2 {
+      font-size: 2rem;
+    }
+  }
+
+  .featureGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .demoContainer {
+    grid-template-columns: 1fr;
+  }
+}

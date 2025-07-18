@@ -8,6 +8,8 @@ import Loading from "../components/Loading/Loading.tsx";
 import ScenePage from "../pages/scene/ScenePage/ScenePage.tsx";
 import Algorithm from "../pages/algorithm";
 import CategoryPage from "../pages/algorithm/CategoryPage.tsx";
+import AnimationScene from "../pages/scene/Detail/AnimationScene/AnimationScene.tsx";
+import ZustandScene from "../pages/scene/Detail/ZustandScene/ZustandScene.tsx";
 
 // 懒加载页面
 const Welcome = lazy(() => import("../pages/welcome"));
@@ -47,7 +49,8 @@ const App = () => {
 
                     {/*开发场景*/}
                     <Route path="scene/Page" element={<ScenePage/>}/>
-
+                    <Route path="scene/detail/animation" element={<AnimationScene />} />
+                    <Route path="scene/detail/zustand" element={<ZustandScene />} />
                     {/*    算法专区*/}
                     <Route path="algorithm/Page" element={<Algorithm/>}/>
                     <Route path="algorithm/page/:category" element={<CategoryPage/>}/>
