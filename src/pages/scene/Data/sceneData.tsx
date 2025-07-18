@@ -1,4 +1,4 @@
-import {FaMagic, FaBolt} from "react-icons/fa";
+import {FaMagic, FaBolt, FaKey} from "react-icons/fa";
 import type {ReactNode} from "react";
 
 interface SceneItem {
@@ -21,5 +21,10 @@ export const sceneList: SceneItem[] = [
         desc: " 轻量、高效、无样板代码的 React 状态管理解决方案",
         icon: <FaBolt/>, // 使用闪电图标，象征轻量、快速的状态管理
     },
-
+    {
+        key: "nodeJwt",
+        title: "JWT：Node.js 身份验证利器",
+        desc: "基于 Token 的无状态认证机制，保障前后端安全通信",
+        icon: <FaKey />, // 使用钥匙图标，象征身份验证与访问控制
+    }
 ];
