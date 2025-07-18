@@ -99,7 +99,7 @@ const Hero: React.FC = () => {
                             GitHub
                         </a>
                         <a
-                            href="/src/assets/resume/resume.pdf"
+                            href="/public/resume.pdf"
                             target="_blank"
                             rel="noreferrer"
                         >

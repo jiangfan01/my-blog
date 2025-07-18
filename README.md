@@ -1,4 +1,4 @@
-# 📝 My Blog
+# 📝 My Blog（持续迭代中）
 
 > 🚀 现代化个人技术博客系统，基于 React 18 + TypeScript + Vite 构建，支持平滑滚动、GSAP 动效、Markdown 文章渲染与 CI/CD 自动部署，持续优化中。
 
