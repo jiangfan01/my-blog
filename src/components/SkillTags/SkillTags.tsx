@@ -67,13 +67,10 @@ const SkillTags = () => {
             .padding(10)
             .rotate(() => Math.random() * 15)
             .font("Verdana")
-            // @ts-ignore
-            .fontSize((d) => d.size)
+            .fontSize((d) => d.size ?? 16)
             .on("end", (words) => {
                 const svg = d3.select(svgRef.current);
                 svg.selectAll("*").remove();
-
-
                 const texts = svg
                     .attr("width", dimensions.width)
                     .attr("height", dimensions.height)
@@ -88,8 +85,7 @@ const SkillTags = () => {
                     .style("cursor", "pointer")
                     .attr("text-anchor", "middle")
                     .attr("transform", (d) => `translate(${d.x},${d.y})rotate(${d.rotate})`)
-                    // @ts-ignore
-                    .text((d) => d.text)
+                    .text((d) => d.text ?? "")
                     .style("opacity", 0)
                     .style("transform-origin", "center center")
                     .on("mouseover", function () {
