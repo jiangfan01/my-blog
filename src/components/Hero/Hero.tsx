@@ -4,6 +4,7 @@ import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {showMessage} from "../MessageBox/useMessage";
 import avatar from "../../assets/images/avatar.jpg";
+import {withBase} from "../../config/withBase.ts";
 
 // 注册 ScrollTrigger 插件
 gsap.registerPlugin(ScrollTrigger);
@@ -99,7 +100,7 @@ const Hero: React.FC = () => {
                             GitHub
                         </a>
                         <a
-                            href="/public/resume.pdf"
+                            href={withBase("resume.pdf")}
                             target="_blank"
                             rel="noreferrer"
                         >
