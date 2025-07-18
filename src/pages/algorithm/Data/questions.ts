@@ -588,9 +588,215 @@ function findLengthOfLCIS(nums: number[]): number {
 ✅ 面试常考，注意题目对“连续”的要求，别混淆！
 
 `
+    },
+    {
+        id: 7,
+        title: "数组分块 chunk",
+        category: "array",
+        difficulty: "简单",
+        description: `
+实现一个函数 \`chunk\`，将数组分成多个长度为 \`size\` 的区块，并将这些区块组成一个新数组返回。如果数组不能被均分，最后剩余的元素也要组成一个区块。
+
+---
+
+### 示例：
+
+\`\`\`js
+chunk([1, 2, 3, 4, 5], 2);
+// => [[1, 2], [3, 4], [5]]
+\`\`\`
+
+---
+
+### 函数签名：
+
+\`\`\`js
+function chunk(arr, size) {}
+\`\`\`
+`,
+        answer: `
+### ✅ 解法 1：遍历切片法（推荐）
+
+---
+
+### 💡 思路：
+- 利用 \`for\` 循环，每次步进 \`size\`；
+- 使用 \`slice(i, i + size)\` 截取固定大小子数组；
+- 结果数组每次 push 一个分块。
+
+---
+
+### ✅ 代码：
+
+\`\`\`js
+function chunk(arr, size) {
+  const res = [];
+  if(size < 1) return []; //size为0的边界情况
+  for (let i = 0; i < arr.length; i += size) {
+    res.push(arr.slice(i, i + size));
+  }
+  return res;
+}
+\`\`\`
+
+---
+
+### ✅ 解法 2：临时数组缓存法
+
+---
+
+### 💡 思路：
+- 使用一个临时子数组保存当前块；
+- 遍历时逐个加入，达到 \`size\` 就 push 到结果中并清空临时数组。
+
+---
+
+### ✅ 代码：
+
+\`\`\`js
+function chunk(arr, size) {
+  const res = [];
+  let temp = [];
+  for (let item of arr) {
+    temp.push(item);
+    if (temp.length === size) {
+      res.push(temp);
+      temp = [];
+    }
+  }
+  if (temp.length) res.push(temp); // 剩余部分
+  return res;
+}
+\`\`\`
+
+---
+
+### ✅ 解法 3：使用 reduce 高阶函数
+
+---
+
+### 💡 思路：
+- 利用 \`reduce\` 累积结果数组；
+- 每次判断是否需要新建子数组。
+
+---
+
+### ✅ 代码：
+
+\`\`\`js
+function chunk(arr, size) {
+  return arr.reduce((res, curr) => {
+    const last = res[res.length - 1];
+    if (!last || last.length === size) {
+      res.push([curr]);
+    } else {
+      last.push(curr);
+    }
+    return res;
+  }, []);
+}
+\`\`\`
+
+---
+### ⏱️ 时间复杂度：O(n)  
+### 🧠 空间复杂度：O(n)
+
+---
+
+### 🔚 适用场景：
+
+- 用于分页展示数据；
+- 拆分任务块、分组处理；
+- chunk 是经典的数组处理函数。
+
+`
+    },
+    {
+        id: 8,
+        title: "countBy筛选",
+        category: "array",
+        difficulty: "简单",
+        description: `
+## 📌 countBy 筛选
+
+实现一个函数 \`countBy\`，根据数组元素经过某个函数处理后的结果进行分组，并统计每组的数量。
+
+类似于 lodash 中的 \`_.countBy\`。
+
+**示例：**
+
+\`\`\`js
+countBy([6.1, 4.2, 6.3], Math.floor)
+// => { '4': 1, '6': 2 }
+
+countBy(['one', 'two', 'three'], 'length')
+// => { '3': 2, '5': 1 }
+\`\`\`
+  `,
+        answer: `
+## ✅ 解法一：使用 for of 遍历
+
+\`\`\`js
+function countBy(array, iteratee) {
+  const result = {};
+
+  for (const item of array) {
+    let key;
+    if (typeof iteratee === 'function') {
+      key = iteratee(item); // iteratee 是函数
+    } else if (typeof iteratee === 'string') {
+      key = item[iteratee]; // iteratee 是属性名，如 'length'
+    } else {
+      key = item; // 默认情况
     }
 
+    result[key] ? result[key]++ : (result[key] = 1);
+  }
 
+  return result;
+}
+\`\`\`
+
+---
+
+## ✅ 解法二：使用 reduce
+
+\`\`\`js
+function countBy(array, iteratee) {
+  return array.reduce((acc, item) => {
+    const key = typeof iteratee === 'function' ? iteratee(item) : item[iteratee];
+    acc[key] = (acc[key] || 0) + 1;
+    return acc;
+  }, {});
+}
+\`\`\`
+
+---
+
+## ✅ 解法三：使用 Map（可选更强类型支持）
+
+\`\`\`js
+function countBy(array, iteratee) {
+  const map = new Map();
+
+  for (const item of array) {
+    const key = typeof iteratee === 'function' ? iteratee(item) : item[iteratee];
+    map.set(key, (map.get(key) || 0) + 1);
+  }
+
+  return Object.fromEntries(map);
+}
+\`\`\`
+
+---
+
+## 🧠 思路解析
+
+- \`iteratee\` 可以是函数，也可以是属性名（如 'length'）。
+- 每个元素根据规则归类（分组），然后统计各组数量。
+- 注意要处理 \`undefined\` 值或异常情况。
+  `
+    }
 
 
 
