@@ -4,6 +4,7 @@ import {FaGithub, FaWeixin, FaVideo} from "react-icons/fa";
 import gsap from "gsap";
 import douyin from "../../assets/images/douyin.jpg"
 import wexin from "../../assets/images/weixin.jpg"
+import {showMessage} from "../MessageBox/useMessage.ts";
 
 const Footer: React.FC = () => {
     const [visibleQr, setVisibleQr] = useState<"wechat" | "douyin" | null>(null);
@@ -31,9 +32,9 @@ const Footer: React.FC = () => {
         }
     }, [visibleQr]);
 
-    const handleMobileToggle = (type: "wechat" | "douyin") => {
+    const handleMobileToggle = (type: "微信" | "抖音") => {
         if (window.innerWidth <= 768) {
-            setVisibleQr(prev => (prev === type ? null : type));
+            showMessage(`请前往PC端查看${type}二维码`)
         }
     };
 
@@ -47,7 +48,7 @@ const Footer: React.FC = () => {
 
                 <div
                     className={styles.iconWrapper}
-                    onClick={() => handleMobileToggle("douyin")}
+                    onClick={() => handleMobileToggle("抖音")}
                     onMouseEnter={() => window.innerWidth > 768 && setVisibleQr("douyin")}
                     onMouseLeave={() => window.innerWidth > 768 && setVisibleQr(null)}
                 >
@@ -62,7 +63,7 @@ const Footer: React.FC = () => {
 
                 <div
                     className={styles.iconWrapper}
-                    onClick={() => handleMobileToggle("wechat")}
+                    onClick={() => handleMobileToggle("微信")}
                     onMouseEnter={() => window.innerWidth > 768 && setVisibleQr("wechat")}
                     onMouseLeave={() => window.innerWidth > 768 && setVisibleQr(null)}
                 >
