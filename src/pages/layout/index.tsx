@@ -7,6 +7,7 @@ import Footer from "../../components/Footer";
 // import Home from "../home";
 import {Outlet, useLocation} from "react-router-dom";
 
+
 const Layout = () => {
 
     const tabsRef = useRef<HTMLDivElement>(null);
@@ -58,7 +59,7 @@ const Layout = () => {
             <div ref={tabsRef} className={styles.tabsWrapper}>
                 <Tabs/>
             </div>
-            <main style={{paddingTop: "10vh", paddingBottom: "10vh", minHeight: 'calc(100vh - 50px)'}}>
+            <main className={styles.main}>
                 <Outlet/>
             </main>
             <Footer/>

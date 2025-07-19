@@ -14,13 +14,12 @@ const Nutshell: React.FC = () => {
                 if (entry.isIntersecting) {
                     gsap.fromTo(
                         textRef.current,
-                        {opacity: 0, y: 20},
+                        {opacity: 0, x: -150},
                         {
                             opacity: 1,
-                            y: 0,
-                            duration: 1.4,
+                            x: 0,
+                            duration: .8,
                             ease: "power4.out",
-                            delay: 0.3
                         }
                     );
                     observer.unobserve(el);

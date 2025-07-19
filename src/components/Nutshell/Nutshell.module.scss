@@ -1,3 +1,7 @@
+$tablet: 768px;
+$desktop: 1024px;
+
+
 .nutshell {
   max-width: 970px;
   margin: 40px auto 20px;
@@ -7,6 +11,14 @@
   line-height: 1.8;
   transition: all 0.3s;
   font-size: 130%;
+  @media (max-width: $desktop - 1) {
+    max-width: 100%;
+    padding: 0 1rem;
+    font-size: 100%;
+    transition: all 0.3s ease;
+    margin: 0;
+    margin-bottom: 2vh;
+  }
 
   p {
     margin: 0;

@@ -1,3 +1,6 @@
+$tablet: 768px;
+$desktop: 1024px;
+
 .heroWrapper {
   display: flex;
   justify-content: center;
@@ -21,6 +24,8 @@
     flex-direction: column;
     width: 100%;
     padding: 30px 20px;
+    margin: 0 3vh;
+    gap: 0;
   }
 }
 
@@ -37,6 +42,11 @@
   &:hover {
     transform: scale(1.1);
   }
+
+  @media (max-width: 768px - 1) {
+    width: 120px;
+    height: 120px;
+  }
 }
 
 .infoBox {
@@ -45,11 +55,14 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
 
   h1 {
     font-size: 28px;
     margin-bottom: 10px;
+    @media (max-width: 768px - 1) {
+      font-size: 1.2rem;
+    }
 
     .name {
       color: var(--text-color);

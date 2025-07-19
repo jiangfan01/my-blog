@@ -1,3 +1,17 @@
+$tablet: 768px;
+$desktop: 1024px;
+
+.main {
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+  min-height: calc(100vh - 50px);
+  @media (max-width: $desktop) {
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+  }
+
+}
+
 .tabsWrapper {
   position: sticky;
   top: 0;
@@ -7,3 +21,4 @@
   margin: 0 auto;
   border-radius: 24px;
 }
+

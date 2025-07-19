@@ -56,10 +56,12 @@ const SkillTags = () => {
             },
         });
 
+        const baseFontSize = dimensions.width / 30;
+
         const fontSizeScale = d3
             .scaleLinear()
             .domain([d3.min(skillList, (d) => d.weight)!, d3.max(skillList, (d) => d.weight)!])
-            .range([16, 48]);
+            .range([baseFontSize * 0.6, baseFontSize * 1.4]);
 
         const layout = cloud()
             .size([dimensions.width, dimensions.height])
