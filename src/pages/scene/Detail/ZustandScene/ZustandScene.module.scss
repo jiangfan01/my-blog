@@ -1,3 +1,6 @@
+$tablet: 768px;
+$desktop: 1024px;
+
 
 .zustandContainer {
   max-width: 1200px;
@@ -346,9 +349,10 @@
 }
 
 .footer {
-  padding: 3rem 0;
+  padding: 4rem 0 3rem;
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 3rem;
+  transition: border-color 0.3s;
 }
 
 .footerContent {
@@ -363,33 +367,65 @@
   margin-bottom: 1.5rem;
   font-size: 1.8rem;
   color: var(--primary-color);
+
+  span {
+    font-size: 2.2rem;
+    margin-right: 0.8rem;
+  }
 }
 
 .logoText {
-  margin-left: 0.8rem;
   font-weight: 700;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
 }
 
 .footerText {
-  color: var(--text-color);
-  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.8rem;
+  font-size: 1.1rem;
 }
 
 .footerLinks {
   display: flex;
   justify-content: center;
-  gap: 2rem;
-  margin: 1.5rem 0;
+  gap: 2.5rem;
+  margin: 1.8rem 0;
+
+  @media (max-width: $tablet) {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
 }
 
 .footerLink {
   color: var(--primary-color);
   text-decoration: none;
-  transition: opacity 0.3s;
+  transition: all 0.3s;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  padding: 0.5rem 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+  }
 
   &:hover {
-    opacity: 0.8;
-    text-decoration: underline;
+    color: var(--accent-color);
+
+    &::after {
+      width: 100%;
+    }
   }
 }
 

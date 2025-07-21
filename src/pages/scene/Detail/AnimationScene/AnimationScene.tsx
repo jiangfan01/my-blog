@@ -90,6 +90,9 @@ const AnimationScene: React.FC = () => {
             <BackButton/>
             <div className={styles.container}>
                 <header className={styles.header} ref={headerRef}>
+                    <div className={styles.headerIcon}>
+                        <FaMagic/>
+                    </div>
                     <div className={styles.headerTitle}>
                         <h1>动效统一管理</h1>
                         <p>
