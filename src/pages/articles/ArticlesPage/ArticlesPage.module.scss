@@ -1,7 +1,16 @@
+$tablet: 768px;
+$desktop: 1024px;
+
+
 .container {
   padding: 2rem;
   width: 970px;
   margin: 0 auto;
+  @media (max-width: $tablet) {
+    width: 100%;
+    padding: 0;
+    transition: all 0.3s ease;
+  }
 }
 
 .title {
@@ -10,12 +19,22 @@
   font-weight: bold;
   color: var(--text-color);
   transition: color 0.3s ease;
+  @media (max-width: $tablet) {
+    font-size: 1.2rem;
+    text-align: center;
+  }
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
+  @media (max-width: $tablet) {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem 1rem;
+    transition: all 0.3s ease;
+  }
 }
 
 .card {
@@ -27,6 +46,9 @@
   cursor: pointer;
   box-shadow: 0 4px 12px var(--shadow-color);
   transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  @media (max-width: $tablet) {
+    padding: 1rem;
+  }
 
   &:hover {
     transform: translateY(-6px) scale(1.05);

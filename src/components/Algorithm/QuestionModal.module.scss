@@ -1,3 +1,6 @@
+$tablet: 768px;
+$desktop: 1024px;
+
 .overlay {
   position: fixed;
   inset: 0;
@@ -24,6 +27,9 @@
   overflow: hidden;
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
+  @media (max-width: $tablet) {
+    min-width: 100%;
+  }
 }
 
 .left {

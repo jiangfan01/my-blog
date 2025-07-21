@@ -1,8 +1,16 @@
+$tablet: 768px;
+$desktop: 1024px;
+
 .backContainer {
   position: absolute;
   left: 10%;
   top: 20vh;
   min-width: 320px;
+  z-index: 999;
+
+  @media (max-width: $tablet) {
+    display: none;
+  }
 
   .back {
     display: flex;
@@ -15,16 +23,12 @@
     cursor: pointer;
     font-size: 15px;
     font-weight: 500;
-
-    // 高级背景和玻璃效果
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(12px) saturate(180%);
     -webkit-backdrop-filter: blur(12px) saturate(180%);
     color: var(--text-color);
-
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-
     transition: all 0.3s ease;
 
     // 图标大小单独控制
@@ -43,3 +47,4 @@
     }
   }
 }
+
