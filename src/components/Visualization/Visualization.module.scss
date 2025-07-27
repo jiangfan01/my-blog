@@ -18,7 +18,7 @@
   border-radius: 12px;
   box-shadow: 0 10px 50px var(--shadow-color);
   width: 90%;
-  max-width: 900px;
+  max-width: 1200px;
   max-height: 90vh;
   overflow: hidden;
   display: flex;
@@ -570,7 +570,6 @@
 
 // 队列可视化区域
 .queueVisualization {
-  width: 100%;
   padding: 24px;
   background: var(--card-bg);
   border-radius: 16px;

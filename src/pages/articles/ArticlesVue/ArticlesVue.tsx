@@ -1224,8 +1224,92 @@ export default {
 📌 **总结**：  
 \`h\` 函数是 Vue 3 渲染函数的核心，灵活且强大，掌握它能帮你深入理解 Vue 的渲染机制，并应对复杂的动态渲染场景。
 `
-        }
-    ]
+        },
+        {
+            question: "Vue2 与 Vue3 中添加全局属性/方法的方式",
+            answer: `
+## 🌍 Vue 全局属性与方法添加方式对比
+
+---
+
+### Vue 2 中的写法：使用 \`Vue.prototype\`
+
+在 Vue 2 中，可以通过 \`Vue.prototype\` 添加全局属性或方法，使其在所有组件中通过 \`this\` 访问。
+
+\`\`\`js
+// main.js
+Vue.prototype.$appName = "我的应用";
+Vue.prototype.$log = function(msg) {
+  console.log("全局日志:", msg);
+};
+\`\`\`
+
+在组件中使用：
+
+\`\`\`js
+export default {
+  mounted() {
+    console.log(this.$appName); // 我的应用
+    this.$log("页面加载完成");   // 全局日志: 页面加载完成
+  }
+};
+\`\`\`
+
+---
+
+### Vue 3 中的写法：使用 \`app.config.globalProperties\`
+
+Vue 3 移除了 \`Vue.prototype\`，改用 \`app.config.globalProperties\` 来挂载全局属性或方法。
+
+\`\`\`js
+// main.js
+import { createApp } from "vue";
+import App from "./App.vue";
+
+const app = createApp(App);
+
+app.config.globalProperties.$appName = "Vue3 应用";
+app.config.globalProperties.$log = function(msg) {
+  console.log("Vue3 全局日志:", msg);
+};
+
+app.mount("#app");
+\`\`\`
+
+在组件中一样使用 \`this\` 访问：
+
+\`\`\`js
+export default {
+  mounted() {
+    console.log(this.$appName); // Vue3 应用
+    this.$log("页面初始化");     // Vue3 全局日志: 页面初始化
+  }
+};
+\`\`\`
+
+---
+
+### 📌 对比总结
+
+| 特性               | Vue 2                            | Vue 3                                      |
+|--------------------|----------------------------------|--------------------------------------------|
+| 添加方式           | \`Vue.prototype.xxx\`            | \`app.config.globalProperties.xxx\`        |
+| 使用方式           | \`this.xxx\`                     | \`this.xxx\`                               |
+| 适用场景           | 全局函数、工具、配置注入         | 同上，但需使用 \`createApp\` 实例配置     |
+| 生命周期内访问     | 可以                             | 可以                                       |
+
+---
+
+### 📚 参考文档
+
+- [Vue 2 全局 API](https://cn.vuejs.org/v2/api/#Vue-prototype)
+- [Vue 3 应用实例配置](https://cn.vuejs.org/api/application.html#app-config-globalproperties)
+
+---
+`
+}
+
+]
     return (
         <>
             <div>
