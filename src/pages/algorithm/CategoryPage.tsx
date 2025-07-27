@@ -8,6 +8,7 @@ import styles from "./Category.module.scss";
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import BackButton from "../../components/BackButton/BackButton.tsx";
+import VisualizationModal from "../../components/Visualization/VisualizationModal.tsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,6 +17,7 @@ const CategoryPage: React.FC = () => {
     const filtered = questions.filter((q) => q.category === category);
     const [activeQuestion, setActiveQuestion] = useState<Question | null>(null);
     const [activeDifficulty, setActiveDifficulty] = useState<"简单" | "中等" | "困难" | "全部">("全部");
+    const [showVisualization, setShowVisualization] = useState(false);
 
     // 获取所有难度级别的题目
     const groupByDifficulty = (level: "简单" | "中等" | "困难") =>
@@ -130,12 +132,21 @@ const CategoryPage: React.FC = () => {
     return (
         <>
             <BackButton/>
+
             <div className={styles.container}>
                 <div className={styles.header} ref={headerRef}>
                     <h2 className={styles.title}>
                         <span className={styles.categoryIcon}>📚</span>
                         {category} 类题目
                         <span className={styles.badge}>{allQuestions.length}题</span>
+
+                        <button
+                            className={styles.visualizeButton}
+                            onClick={() => setShowVisualization(true)}
+                        >
+                            <span className={styles.vizIcon}></span> 查看{category}数据结构可视化
+                        </button>
+
                     </h2>
                     <p className={styles.subtitle}>按难度分类浏览题目，点击卡片查看详情</p>
                 </div>
@@ -209,6 +220,13 @@ const CategoryPage: React.FC = () => {
                             answer: activeQuestion.answer || "暂无答案"
                         }}
                         onClose={() => setActiveQuestion(null)}
+                    />
+                )}
+
+                {showVisualization && category && (
+                    <VisualizationModal
+                        structureType={category}
+                        onClose={() => setShowVisualization(false)}
                     />
                 )}
             </div>

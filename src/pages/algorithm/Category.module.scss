@@ -27,6 +27,34 @@
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
+  flex-direction: column;
+
+  .visualizeButton {
+    display: flex;
+    align-items: center;
+    padding: 10px 10px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(74, 111, 165, 0.3);
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(74, 111, 165, 0.4);
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+
+  .vizIcon {
+    margin-right: 8px;
+    font-size: 1.2rem;
+  }
 
   .categoryIcon {
     font-size: 2.2rem;
@@ -281,9 +309,9 @@
   font-weight: 700;
   color: var(--text-color);
   margin-bottom: 1.2rem;
-  white-space: nowrap;        /* 不换行 */
-  overflow: hidden;           /* 超出隐藏 */
-  text-overflow: ellipsis;    /* 用省略号显示溢出部分 */
+  white-space: nowrap; /* 不换行 */
+  overflow: hidden; /* 超出隐藏 */
+  text-overflow: ellipsis; /* 用省略号显示溢出部分 */
   transition: color 0.3s ease;
 }
 

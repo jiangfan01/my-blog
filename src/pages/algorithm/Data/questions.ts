@@ -948,7 +948,219 @@ function minRemoveToMakeValid(s) {
 - 时间复杂度：O(n)，只遍历两次。
 - 空间复杂度：O(n)，用于存储索引。
 `
+    },
+    {
+        id: 11,
+        title: "每日温度",
+        category: "stack",
+        difficulty: "中等",
+        description: `
+## 🌡️ 每日温度（Daily Temperatures）
+
+给定一个整数数组 \`temperatures\`，表示每天的温度，返回一个数组 \`answer\`，其中 \`answer[i]\` 表示从第 i 天开始，**要等多少天才会有更高的温度**。如果没有更高温度，则为 0。
+
+**示例：**
+
+\`\`\`js
+dailyTemperatures([73, 74, 75, 71, 69, 72, 76, 73])
+// => [1, 1, 4, 2, 1, 1, 0, 0]
+\`\`\`
+  `,
+        answer: `
+## ✅ 解法：单调递减栈
+
+\`\`\`js
+function dailyTemperatures(temperatures) {
+  const stack = []; // 存放下标
+  const res = new Array(temperatures.length).fill(0);
+
+  for (let i = 0; i < temperatures.length; i++) {
+    while (stack.length && temperatures[i] > temperatures[stack[stack.length - 1]]) {
+      const prevIndex = stack.pop();
+      res[prevIndex] = i - prevIndex;
     }
+    stack.push(i);
+  }
+
+  return res;
+}
+\`\`\`
+
+---
+
+## 🧠 思路解析
+
+- 使用一个**单调递减栈**，栈中存的是还没遇到更高温度的下标。
+- 当前温度比栈顶元素高，说明找到“升温日”，计算差值填入结果。
+- 最终未出栈的元素，说明后面都没有更高温度，保留为 0。
+- 时间复杂度：O(n)，每个元素最多进出栈一次。
+- 空间复杂度：O(n)，存储栈和结果。
+`
+    },
+    {
+        id: 12,
+        title: "用队列实现栈",
+        category: "queue",
+        difficulty: "简单",
+        description: `
+## 📥 用队列实现栈
+
+使用两个队列 \`queue1\` 和 \`queue2\` 来实现一个先进后出的栈。
+
+实现以下操作：
+- \`push(x)\`：将元素 x 推入栈顶
+- \`pop()\`：移除栈顶元素并返回
+- \`top()\`：返回栈顶元素
+- \`empty()\`：判断栈是否为空
+
+**示例：**
+
+\`\`\`js
+const s = new MyStack();
+s.push(1);
+s.push(2);
+s.top();   // 返回 2
+s.pop();   // 返回 2
+s.empty(); // false
+\`\`\`
+  `,
+        answer: `
+## ✅ 解法：两个队列模拟栈（函数式写法）
+
+\`\`\`js
+function MyStack() {
+  this.queue1 = [];
+  this.queue2 = [];
+}
+
+MyStack.prototype.push = function(x) {
+  this.queue1.push(x);
+};
+
+MyStack.prototype.pop = function() {
+  while (this.queue1.length > 1) {
+    this.queue2.push(this.queue1.shift());
+  }
+  const popped = this.queue1.shift();
+  [this.queue1, this.queue2] = [this.queue2, this.queue1];
+  return popped;
+};
+
+MyStack.prototype.top = function() {
+  while (this.queue1.length > 1) {
+    this.queue2.push(this.queue1.shift());
+  }
+  const top = this.queue1.shift();
+  this.queue2.push(top);
+  [this.queue1, this.queue2] = [this.queue2, this.queue1];
+  return top;
+};
+
+MyStack.prototype.empty = function() {
+  return this.queue1.length === 0;
+};
+\`\`\`
+
+---
+
+## 🧠 思路解析
+
+- 使用两个队列，\`queue1\` 用于存储元素，\`queue2\` 辅助实现栈顶操作。
+- \`pop\` 和 \`top\` 操作通过将 \`queue1\` 中元素逐个出队并入队到 \`queue2\`，只留下最后一个元素即为栈顶。
+- 操作完成后交换两个队列，保证下一次操作从 \`queue1\` 开始。
+- 时间复杂度：\`push\` O(1)，\`pop\` 和 \`top\` 均为 O(n)。
+- 空间复杂度：O(n)，存储队列元素。
+`
+    },
+    {
+        id: 13,
+        title: "环形队列",
+        category: "queue",
+        difficulty: "简单",
+        description: `
+## 🔄 环形队列设计
+
+设计一个环形队列（循环队列），实现以下操作：
+- \`enQueue(value)\`：将一个元素添加到队尾，成功返回 \`true\`，队满返回 \`false\`
+- \`deQueue()\`：删除队头元素，成功返回 \`true\`，队空返回 \`false\`
+- \`Front()\`：获取队头元素，队空返回 \`-1\`
+- \`Rear()\`：获取队尾元素，队空返回 \`-1\`
+- \`isEmpty()\`：检查队列是否为空
+- \`isFull()\`：检查队列是否为满
+
+**示例：**
+
+\`\`\`js
+const cq = new MyCircularQueue(3);
+cq.enQueue(1); // true
+cq.enQueue(2); // true
+cq.enQueue(3); // true
+cq.enQueue(4); // false 队满
+cq.Rear();     // 3
+cq.isFull();   // true
+cq.deQueue();  // true
+cq.enQueue(4); // true
+cq.Rear();     // 4
+\`\`\`
+  `,
+        answer: `
+## ✅ 解法：数组实现环形队列（函数式写法）
+
+\`\`\`js
+function MyCircularQueue(k) {
+  this.queue = new Array(k);
+  this.head = 0;
+  this.tail = 0;
+  this.size = 0;
+  this.capacity = k;
+}
+
+MyCircularQueue.prototype.enQueue = function(value) {
+  if (this.isFull()) return false;
+  this.queue[this.tail] = value;
+  this.tail = (this.tail + 1) % this.capacity;
+  this.size++;
+  return true;
+};
+
+MyCircularQueue.prototype.deQueue = function() {
+  if (this.isEmpty()) return false;
+  this.head = (this.head + 1) % this.capacity;
+  this.size--;
+  return true;
+};
+
+MyCircularQueue.prototype.Front = function() {
+  return this.isEmpty() ? -1 : this.queue[this.head];
+};
+
+MyCircularQueue.prototype.Rear = function() {
+  if (this.isEmpty()) return -1;
+  return this.queue[(this.tail - 1 + this.capacity) % this.capacity];
+};
+
+MyCircularQueue.prototype.isEmpty = function() {
+  return this.size === 0;
+};
+
+MyCircularQueue.prototype.isFull = function() {
+  return this.size === this.capacity;
+};
+\`\`\`
+
+---
+
+## 🧠 思路解析
+
+- 使用固定大小的数组模拟队列。
+- \`head\` 和 \`tail\` 指针循环移动，实现环形效果。
+- 通过 \`size\` 判断队列满或空状态，避免指针重合判断歧义。
+- 入队尾部插入，出队头部删除。
+- 时间复杂度均为 O(1)。
+- 空间复杂度为 O(k)，固定大小。
+`
+    }
+
 
 
 ];

@@ -512,7 +512,115 @@ const helloWorld = () => {
 
 高质量代码离不开规范和工具的配合。通过 ESLint、Prettier、Husky 等工具自动化检查和修复问题，可以减少 bug、提高协作效率，是现代前端项目必备流程。
 `
+        },
+        {
+            question: "前端安全：XSS 与 CSRF 攻击防护",
+            answer: `
+## 🔐 前端安全：XSS 与 CSRF 攻击防护
+
+---
+
+### 1. 前端安全
+
+- 防止敏感信息泄露（如 Cookie、Token）
+- 防止恶意操作（如伪造请求、数据篡改）
+- 提升系统抗攻击能力，保护用户体验
+- 是 Web 应用上线的 **合规要求**
+
+---
+
+### 2. 常见前端攻击类型
+
+| 攻击类型 | 简介 |
+|----------|------|
+| **XSS（跨站脚本攻击）** | 注入恶意脚本到网页，执行任意 JS 代码 |
+| **CSRF（跨站请求伪造）** | 利用用户身份伪造请求，执行敏感操作 |
+
+---
+
+### 3. XSS 攻击详解
+
+#### ✅ XSS 示例（存储型）：
+
+攻击者提交一条评论，后台未做处理：
+
+\`\`\`html
+<script>alert("你被攻击了")</script>
+\`\`\`
+
+若页面未对内容做转义，这段代码将会执行。
+
+#### 💡 XSS 防护策略：
+
+- **对用户输入进行转义**（HTML Encode）：
+  \`<\` => \`&lt;\`，\`>\` => \`&gt;\`
+- **使用框架绑定数据（如 React / Vue）**：自动做转义
+- **避免使用 \`innerHTML\` 等直接插入 HTML 的方式**
+- 设置合适的 **Content Security Policy（CSP）**
+
+#### React 自动转义示例：
+
+\`\`\`jsx
+<div>{userInput}</div> // 安全，React 会自动转义标签
+\`\`\`
+
+---
+
+### 4. CSRF 攻击详解
+
+#### ✅ CSRF 攻击原理：
+
+用户登录状态下访问恶意网站，发起伪造请求：
+
+\`\`\`html
+<img src="https://your-site.com/delete?id=123" />
+\`\`\`
+
+如果后端没有验证来源，就可能执行了危险操作。
+
+#### 💡 CSRF 防护策略：
+
+| 方法 | 原理 |
+|------|------|
+| **Token 校验（推荐）** | 每次请求附带一个服务器生成的 Token，需比对验证 |
+| **Referer 检查** | 拒绝非本站地址发起的请求 |
+| **SameSite Cookie 属性** | 限制第三方请求携带 Cookie |
+| **POST + Token 双重保护** | 避免 GET 接口带来副作用操作 |
+
+#### 示例：使用 Token 校验（前后端）
+
+前端发请求时带上 Token：
+
+\`\`\`js
+fetch("/api/delete", {
+  method: "POST",
+  headers: {
+    "x-csrf-token": token
+  }
+});
+\`\`\`
+
+后端验证：
+
+\`\`\`js
+if (req.headers["x-csrf-token"] !== session.csrfToken) {
+  return res.status(403).send("非法请求");
+}
+\`\`\`
+
+---
+
+### ✅ 小结
+
+
+- 防止 XSS：**数据展示处做转义 / 避免插入 HTML**
+- 防止 CSRF：**加 token 校验 + Cookie 限制**
+- 配置安全响应头（如 CSP、X-Frame-Options 等）
+
+
+`
         }
+
 
 
     ]

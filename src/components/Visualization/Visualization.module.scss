@@ -1,0 +1,782 @@
+// src/components/visualization/Visualization.module.scss
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.visualizationModal {
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 10px 50px var(--shadow-color);
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: var(--card-bg);
+  color: var(--text-color);
+
+  h2 {
+    margin: 0;
+    text-transform: capitalize;
+    font-size: 1.8rem;
+  }
+}
+
+.closeButton {
+  border: none;
+  font-size: 2rem;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: transform 0.2s;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+  }
+}
+
+.modalContent {
+  padding: 25px;
+  overflow-y: auto;
+  flex-grow: 1;
+  background: var(--secondary-color);
+}
+
+.visualizationContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.controls {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+
+  button {
+    padding: 10px 20px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+
+    &:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px var(--shadow-color);
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+}
+
+.description {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  margin-top: 20px;
+  border: 1px solid var(--border-color);
+
+  h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+  }
+
+  ul {
+    padding-left: 20px;
+
+    li {
+      margin-bottom: 8px;
+      color: var(--text-color);
+    }
+  }
+}
+
+// 数组样式
+.arrayContainer {
+  display: flex;
+  background: var(--code-bg);
+  border-radius: 8px;
+  padding: 15px;
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+}
+
+.arrayElement {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--card-bg);
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+  box-shadow: 0 3px 6px var(--shadow-color);
+  transition: all 0.3s;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px var(--shadow-color);
+  }
+}
+
+.elementValue {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.elementIndex {
+  position: absolute;
+  bottom: 5px;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+// 链表样式
+.linkedListContainer {
+  background: var(--code-bg);
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+}
+
+.linkedList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.headLabel {
+  background: var(--primary-color);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.nodes {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.node {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+}
+
+.nodeValue {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--card-bg);
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  box-shadow: 0 3px 6px var(--shadow-color);
+}
+
+.arrow {
+  position: relative;
+  width: 40px;
+  height: 2px;
+  background: var(--primary-color);
+  margin: 0 5px;
+}
+
+.arrowHead {
+  position: absolute;
+  right: -5px;
+  top: -4px;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 10px solid var(--primary-color);
+}
+
+.emptyList {
+  text-align: center;
+  padding: 30px;
+  color: var(--text-color);
+  opacity: 0.7;
+  font-size: 1.2rem;
+}
+
+.notSupported {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-color);
+
+  div {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    opacity: 0.7;
+  }
+
+  h3 {
+    color: var(--primary-color);
+  }
+}
+// 在现有样式文件中添加栈的样式
+.stackContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 400px;
+  margin: 20px 0;
+  position: relative;
+}
+
+.stackBase, .stackTop {
+  padding: 10px 30px;
+  background: var(--card-bg);
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+  font-weight: bold;
+  color: var(--text-color);
+  z-index: 10;
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.stackBase {
+  border-top: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.stackTop {
+  border-bottom: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  margin-top: -2px;
+}
+
+.stackElements {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  min-height: 300px;
+  width: 200px;
+  position: relative;
+  padding: 20px 0;
+}
+
+.stackElement {
+  width: 150px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--card-bg);
+  border: 2px solid;
+  border-radius: 8px;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+  position: relative;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  animation: stackElementAppear 0.5s ease forwards;
+
+  .elementValue {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+
+  .elementIndex {
+    font-size: 0.8rem;
+    color: var(--text-color);
+    opacity: 0.7;
+    position: absolute;
+    bottom: 5px;
+  }
+}
+
+@keyframes stackElementAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.topElement {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px var(--shadow-color);
+  z-index: 100;
+
+  &::after {
+    content: '栈顶';
+    position: absolute;
+    top: -20px;
+    background: var(--primary-color);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+  }
+}
+
+.peeking {
+  animation: peekAnimation 1s ease-in-out 2;
+
+  @keyframes peekAnimation {
+    0%, 100% {
+      background: var(--card-bg);
+      transform: scale(1.05);
+    }
+    50% {
+      background: var(--primary-color);
+      transform: scale(1.1);
+    }
+  }
+}
+
+.emptyStack {
+  text-align: center;
+  padding: 30px;
+  color: var(--text-color);
+  opacity: 0.7;
+  font-size: 1.2rem;
+
+  i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    display: block;
+  }
+}
+
+.message {
+  padding: 12px 20px;
+  background: var(--card-bg);
+  border-left: 4px solid var(--primary-color);
+  border-radius: 4px;
+  margin: 15px 0;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  animation: messageAppear 0.3s ease;
+
+  i {
+    margin-right: 10px;
+    color: var(--primary-color);
+  }
+}
+
+@keyframes messageAppear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.inputGroup {
+  display: flex;
+  gap: 10px;
+
+  input {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    width: 80px;
+
+    &:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(var(--primary-color), 0.2);
+    }
+  }
+}
+
+.stackUsage {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px dashed var(--border-color);
+
+  h4 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+
+    li {
+      background: var(--code-bg);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+  }
+}
+// 队列控制区域
+.queueControls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto 24px;
+}
+
+.inputGroup {
+  display: flex;
+  gap: 12px;
+
+  .queueInput {
+    flex: 1;
+    padding: 14px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    font-size: 1rem;
+
+    &:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(var(--primary-color), 0.1);
+    }
+  }
+}
+
+.queueActions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.queueButton {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 50px;
+  background: var(--card-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--border-color);
+
+  i {
+    font-size: 1rem;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &.enqueue {
+    border-color: var(--success-color);
+    color: var(--success-color);
+
+    &:hover {
+      background: rgba(var(--success-color), 0.05);
+    }
+  }
+
+  &.dequeue {
+    border-color: var(--danger-color);
+    color: var(--danger-color);
+
+    &:hover {
+      background: rgba(var(--danger-color), 0.05);
+    }
+  }
+
+  &.peek {
+    border-color: var(--info-color);
+    color: var(--info-color);
+
+    &:hover {
+      background: rgba(var(--info-color), 0.05);
+    }
+  }
+
+  &.clear {
+    border-color: var(--warning-color);
+    color: var(--warning-color);
+
+    &:hover {
+      background: rgba(var(--warning-color), 0.05);
+    }
+  }
+}
+
+// 队列可视化区域
+.queueVisualization {
+  width: 100%;
+  padding: 24px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.queueContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+  min-height: 200px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--border-color);
+    z-index: 0;
+  }
+}
+
+.queueFront, .queueRear {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 1;
+  background: var(--card-bg);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.queueLabel {
+  font-weight: 600;
+  color: var(--text-color);
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: rgba(var(--primary-color), 0.1);
+  border: 1px solid var(--primary-color);
+  font-size: 0.9rem;
+}
+
+.queueArrow {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary-color);
+  border-radius: 50%;
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  border: 1px solid var(--border-color);
+}
+
+.queueElements {
+  display: flex;
+  gap: 8px;
+  padding: 20px 0;
+  z-index: 1;
+  min-height: 150px;
+  align-items: center;
+}
+
+.queueElement {
+  width: 100px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  transition: all 0.3s;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  z-index: 2;
+
+  .elementValue {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+  }
+
+  .elementPosition {
+    position: absolute;
+    bottom: 8px;
+    font-size: 0.8rem;
+    color: var(--text-color);
+    opacity: 0.7;
+  }
+}
+
+.emptyQueue {
+  text-align: center;
+  padding: 30px;
+  color: var(--text-color);
+  opacity: 0.7;
+  font-size: 1.1rem;
+  width: 100%;
+
+  i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    display: block;
+    color: var(--primary-color);
+  }
+}
+
+// 查看队首元素的高亮效果
+.peeking {
+  animation: peekAnimation 1s ease-in-out;
+
+  @keyframes peekAnimation {
+    0%, 100% {
+      background: rgba(var(--primary-color), 0.1);
+      box-shadow: 0 4px 12px rgba(var(--primary-color), 0.1);
+    }
+    50% {
+      background: rgba(var(--primary-color), 0.2);
+      box-shadow: 0 4px 16px rgba(var(--primary-color), 0.2);
+      transform: scale(1.05);
+    }
+  }
+}
+
+.queueUsage {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--border-color);
+
+  h4 {
+    color: var(--primary-color);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary-color);
+    }
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    padding-left: 0;
+    list-style: none;
+
+    li {
+      padding: 10px 15px;
+      background: rgba(var(--primary-color), 0.05);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      &::before {
+        content: '•';
+        color: var(--primary-color);
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+// 响应式调整
+@media (max-width: 768px) {
+  .queueContainer {
+    flex-direction: column;
+    gap: 10px;
+
+    &::before {
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+    }
+  }
+
+  .queueFront, .queueRear {
+    flex-direction: row;
+  }
+
+  .queueElements {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .queueActions {
+    grid-template-columns: 1fr;
+  }
+}
