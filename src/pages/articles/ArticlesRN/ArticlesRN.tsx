@@ -254,8 +254,150 @@ Expo 作为 React Native 的轻量级开发平台，极大降低了跨平台移�
 
 React Native 组件体系丰富，合理选用不同类型组件，既能保证开发效率，也能满足性能和功能需求，是开发跨平台移动应用的关键。
 `
-        }
+        },
+        {
+            question: "React Native Bridge （Expo + TS ）",
+            answer: `
+## 🔗 React Native 的 Bridge 桥接机制
 
+---
+
+### 🔹 一、Bridge 是什么？
+
+> React Native 的 **Bridge（桥）机制** 是 JS 与原生模块（iOS/Android）通信的桥梁。  
+即 JS → Native → JS 的双向调用通道。
+
+- JS 层运行在 JavaScriptCore 中
+- Native 层为 iOS（ObjC/Swift）、Android（Java/Kotlin）
+- 两者通过 Bridge（异步、序列化通信）交换数据
+
+---
+
+### 🚀 二、Expo 中还能用 Bridge 吗？
+
+> 可以！虽然 Expo 封装了原生模块，但可以通过：
+
+1. \`expo-modules\`（官方推荐方式）
+2. \`expo-dev-client\` + 自定义原生代码
+3. 与服务端（如 Node.js）通信作为「桥接」思路（常用于 IoT/硬件）
+
+---
+
+### ✅ 三、使用场景示例
+
+| 场景                  | 是否适合 Bridge？              |
+|-----------------------|-------------------------------|
+| 与蓝牙/原生传感器通信 | ✅（需访问原生）               |
+| 跨平台调用摄像头/音频 | ✅（封装 Native API）         |
+| 使用 Expo+TS 调用系统功能 | ✅ 使用 expo-modules 方式    |
+
+---
+
+### 📦 四、使用 Expo Modules + TypeScript 自定义 Native Module
+
+#### 🔧 1. 安装工具
+
+\`\`\`bash
+npx create-expo-module my-native-module
+cd my-native-module
+\`\`\`
+
+#### 🧱 2. 编辑模块代码（如 \`MyBridgeModule.ts\`）
+
+\`\`\`ts
+import { Module, ModuleRegistry, Method } from 'expo-modules-core';
+
+export class MyBridgeModule extends Module {
+  constructor(registry: ModuleRegistry) {
+    super(registry);
+  }
+
+  @Method
+  sayHello(name: string): string {
+    return \`👋 Hello, \${name} from Native!\`;
+  }
+}
+\`\`\`
+
+#### 📦 3. 在 JS 中调用（App.tsx）
+
+\`\`\`tsx
+import { MyBridgeModule } from 'my-native-module';
+
+export default function App() {
+  return (
+    <Text>
+      {MyBridgeModule.sayHello('React Native')}
+    </Text>
+  );
+}
+\`\`\`
+
+> ⚠️ 需要使用 \`expo-dev-client\` 运行才能使用自定义原生模块！
+
+---
+
+### 🌐 五、如果是 Node + React Native？
+
+#### 📡 通过 API/Socket 与 Node 通信，不使用 Bridge！
+
+##### 示例：RN 向 Node Server 发起 HTTP 请求
+
+\`\`\`tsx
+// client/App.tsx
+import { useEffect } from 'react';
+import { Text } from 'react-native';
+
+export default function App() {
+  useEffect(() => {
+    fetch('http://localhost:3000/status')
+      .then(res => res.json())
+      .then(console.log);
+  }, []);
+
+  return <Text>连接 Node 中...</Text>;
+}
+\`\`\`
+
+##### 示例：Node.js 服务端接口
+
+\`\`\`js
+// server/index.js
+const express = require('express');
+const app = express();
+
+app.get('/status', (req, res) => {
+  res.json({ status: '🟢 Connected from Node' });
+});
+
+app.listen(3000, () => {
+  console.log('Node server running on port 3000');
+});
+\`\`\`
+
+---
+
+### 📌 六、总结：什么时候用 RN Bridge？
+
+| 通信对象         | 是否用 Bridge | 备注                           |
+|------------------|---------------|--------------------------------|
+| 原生 API (蓝牙/传感器等) | ✅ 必须        | 使用 Expo Modules 创建         |
+| 第三方库（非 JS 实现）   | ✅ 建议        | 自定义 Native Module 封装      |
+| Node 服务         | ❌ 不用        | 使用 HTTP/WebSocket 即可       |
+| Expo 封装的 API    | ❌ 不用        | 官方已封装桥逻辑                |
+
+---
+
+### 🧠 七、Bridge 陷阱与注意事项
+
+- ⚠️ 通信是**异步的**，不能同步返回值
+- ⚠️ 数据需序列化，避免传递复杂结构体
+- ⚠️ Expo 环境需使用 \`expo-dev-client\` 支持自定义原生模块
+- ✅ 推荐用 \`expo-modules\` + TypeScript 统一管理模块
+
+---
+`
+        }
 
 
 

@@ -556,7 +556,190 @@ React 性能优化不仅包含组件级优化（如 memo、useMemo），也涉�
 
 > ✨ 性能优化的关键：**按需优化 + 实际监测**，建议优先解决用户感知最明显的瓶颈。
 `
+        },
+        {
+            question: "React 18 的新增 Hooks",
+            answer: `
+## ⚛️ React 18 的新增 Hooks（并发特性支持）
+
+---
+
+### 🔹 一、有哪些新 Hook？
+
+> React 18 为支持并发渲染引入了 5 个全新 Hook，用于 ID 生成、状态延迟处理、外部状态同步、样式插入等。
+
+| Hook 名称               | 主要功能描述                      |
+|-------------------------|-----------------------------------|
+| \`useId\`               | 生成稳定、唯一的 ID（支持 SSR）  |
+| \`useTransition\`       | 控制更新优先级（低优先级更新）   |
+| \`useDeferredValue\`    | 延迟非关键数据更新                |
+| \`useSyncExternalStore\`| 订阅外部 store 状态               |
+| \`useInsertionEffect\`  | 提前插入样式，适合 CSS-in-JS 库   |
+
+---
+
+### ✅ 二、useId（唯一 ID 生成）
+
+\`\`\`jsx
+import { useId } from "react";
+
+function InputField() {
+  const id = useId();
+  return (
+    <>
+      <label htmlFor={id}>用户名：</label>
+      <input id={id} type="text" />
+    </>
+  );
+}
+\`\`\`
+
+> 🧠 SSR 时前后端一致，避免 ID 冲突，是取代 \`Math.random()\` 的稳定方案。
+
+---
+
+### ✅ 三、useTransition（低优先级 UI 更新）
+
+\`\`\`jsx
+import { useState, useTransition } from "react";
+
+function SearchComponent() {
+  const [isPending, startTransition] = useTransition();
+  const [query, setQuery] = useState("");
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    startTransition(() => {
+      setQuery(value);
+    });
+  };
+
+  return (
+    <>
+      <input onChange={handleChange} />
+      {isPending ? <span>加载中...</span> : <SearchResult keyword={query} />}
+    </>
+  );
+}
+\`\`\`
+
+> ✅ 将不重要的更新变为“可中断”，提升交互体验。
+
+---
+
+### ✅ 四、useDeferredValue（延迟非核心状态更新）
+
+\`\`\`jsx
+import { useState, useDeferredValue } from "react";
+
+function FilteredList() {
+  const [text, setText] = useState("");
+  const deferredText = useDeferredValue(text);
+
+  return (
+    <>
+      <input value={text} onChange={(e) => setText(e.target.value)} />
+      <ItemList keyword={deferredText} />
+    </>
+  );
+}
+\`\`\`
+
+> 🧠 类似节流：用户输入实时响应，列表异步更新，防止卡顿。
+
+---
+
+### ✅ 五、useSyncExternalStore（同步外部状态）
+
+\`\`\`jsx
+import { useSyncExternalStore } from "react";
+
+const store = {
+  state: 0,
+  listeners: new Set(),
+  subscribe(callback) {
+    store.listeners.add(callback);
+    return () => store.listeners.delete(callback);
+  },
+  getSnapshot: () => store.state,
+  update() {
+    store.state++;
+    store.listeners.forEach((cb) => cb());
+  }
+};
+
+function Counter() {
+  const count = useSyncExternalStore(store.subscribe, store.getSnapshot);
+  return <h1>{count}</h1>;
+}
+\`\`\`
+
+> ✅ 推荐 Redux、Zustand 等外部 store 使用，适配并发模式。
+
+---
+
+### ✅ 六、useInsertionEffect（样式优先插入）
+
+\`\`\`jsx
+import { useInsertionEffect } from "react";
+
+function StyledBox() {
+  useInsertionEffect(() => {
+    const style = document.createElement("style");
+    style.textContent = ".red { color: red; }";
+    document.head.appendChild(style);
+    return () => document.head.removeChild(style);
+  }, []);
+
+  return <div className="red">红色文字</div>;
+}
+\`\`\`
+
+> ⚠️ 优先于 \`useLayoutEffect\` 执行，适合样式系统，如 styled-components。
+
+---
+
+### 🧠 七、实际使用场景
+
+| Hook                    | 场景说明                             |
+|-------------------------|--------------------------------------|
+| \`useId\`               | SSR 页面/多表单场景生成唯一 ID      |
+| \`useTransition\`       | 搜索、分页等需要延迟渲染的场景       |
+| \`useDeferredValue\`    | 输入框与大数据渲染分离，提高性能     |
+| \`useSyncExternalStore\`| 外部状态同步（Redux、Zustand）      |
+| \`useInsertionEffect\`  | 样式提前注入，避免闪烁              |
+
+---
+
+### 🧪 实际代码组合示例
+
+#### 搜索建议组件 + useTransition
+
+\`\`\`jsx
+function Suggestion() {
+  const [input, setInput] = useState("");
+  const [isPending, startTransition] = useTransition();
+
+  const handleInput = (e) => {
+    const value = e.target.value;
+    startTransition(() => {
+      setInput(value);
+    });
+  };
+
+  return (
+    <>
+      <input onChange={handleInput} />
+      {isPending ? <span>加载中...</span> : <Suggestions text={input} />}
+    </>
+  );
+}
+\`\`\`
+
+---
+`
         }
+
 
 
 
