@@ -5,6 +5,7 @@ import styles from "./Visualization.module.scss";
 import ArrayVisualization from "./ArrayVisualization";
 import StackVisualization from "./StackVisualization.tsx";
 import QueueVisualization from "./QueueVisualization.tsx";
+import DPVisualization from "./DPVisualization.tsx";
 
 interface VisualizationModalProps {
     structureType: string;
@@ -52,6 +53,8 @@ const VisualizationModal: React.FC<VisualizationModalProps> = ({
                 return <StackVisualization/>;
             case "queue":
                 return <QueueVisualization/>
+            case "dp":
+                return <DPVisualization/>
             default:
                 return <div className={styles.notSupported}>
                     <div>🚧</div>
