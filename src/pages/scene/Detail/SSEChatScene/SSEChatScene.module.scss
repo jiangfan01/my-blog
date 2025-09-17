@@ -1,0 +1,828 @@
+$tablet: 768px;
+$desktop: 1024px;
+
+.sseContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.header {
+  text-align: center;
+  padding: 4rem 0 3rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.headerContent {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.headerIcon {
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+.headerTitle {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  color: var(--text-color);
+  opacity: 0.8;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.section {
+  padding: 4rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.sectionTitle {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.sectionSubtitle {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+// SSE概念样式
+.conceptContent {
+  margin-bottom: 3rem;
+}
+
+.conceptCard {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 30px var(--shadow-color);
+  margin-bottom: 2rem;
+
+  h3 {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+  }
+
+  p {
+    color: var(--text-color);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+  }
+}
+
+.comparisonGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.comparisonCard {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 30px var(--shadow-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &.highlighted {
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 12px 40px rgba(var(--primary-color-rgb), 0.3);
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  h4 {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    text-align: center;
+  }
+}
+
+.pros, .cons {
+  margin-bottom: 1.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.prosTitle, .consTitle {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: var(--text-color);
+}
+
+.prosTitle {
+  color: #27ae60;
+}
+
+.consTitle {
+  color: #e74c3c;
+}
+
+.pros ul, .cons ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.2rem;
+    position: relative;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    line-height: 1.5;
+
+    &::before {
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+  }
+}
+
+.pros ul li::before {
+  content: '✓';
+  color: #27ae60;
+}
+
+.cons ul li::before {
+  content: '✗';
+  color: #e74c3c;
+}
+
+// 数据流图样式
+.dataFlowDiagram {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 8px 30px var(--shadow-color);
+}
+
+.flowStep {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.stepNumber {
+  background: var(--primary-color);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(var(--primary-color-rgb), 0.3);
+}
+
+.stepContent {
+  flex: 1;
+
+  h4 {
+    color: var(--text-color);
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+  }
+
+  p {
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+}
+
+.miniCode {
+  background: var(--code-bg);
+  color: var(--code-text);
+  border-radius: 6px;
+  padding: 1rem;
+  font-family: 'SF Mono', Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  max-width: 100%;
+
+  pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+.flowArrow {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin: 1rem 0;
+  font-weight: bold;
+}
+
+.designPrinciples {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.principleCard {
+  background: var(--secondary-color);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+
+  h4 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+
+  p {
+    color: var(--text-color);
+    opacity: 0.8;
+    line-height: 1.5;
+    font-size: 0.95rem;
+  }
+}
+
+// 代码实现样式
+.codeImplementation {
+  margin-bottom: 3rem;
+}
+
+.codeSection {
+  margin-bottom: 3rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.codeSectionTitle {
+  color: var(--text-color);
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+// 踩坑经验样式
+.pitfallsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.pitfallCard {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 30px var(--shadow-color);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+.pitfallHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+
+  h3 {
+    color: var(--text-color);
+    font-size: 1.3rem;
+    margin: 0;
+  }
+}
+
+.pitfallIcon {
+  font-size: 1.5rem;
+  background: var(--secondary-color);
+  padding: 0.5rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+}
+
+.pitfallContent {
+  .codeBlock {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+.problemDesc, .solutionDesc {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  line-height: 1.5;
+
+  strong {
+    color: var(--text-color);
+  }
+}
+
+.problemDesc {
+  background: rgba(231, 76, 60, 0.1);
+  border-left: 4px solid #e74c3c;
+  color: var(--text-color);
+}
+
+.solutionDesc {
+  background: rgba(39, 174, 96, 0.1);
+  border-left: 4px solid #27ae60;
+  color: var(--text-color);
+}
+
+// 演示区域样式
+.demoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.demoCard {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 0.5rem;
+  box-shadow: 0 8px 30px var(--shadow-color);
+  position: relative;
+}
+
+.demoHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.demoTitle {
+  font-size: 1.5rem;
+  color: var(--text-color);
+}
+
+.infoButton {
+  background: transparent;
+  border: none;
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+// SSE流演示样式
+.streamConsole {
+  background: var(--code-bg);
+  color: var(--code-text);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  min-height: 200px;
+  font-family: 'SF Mono', Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  position: relative;
+  overflow-y: auto;
+  margin-bottom: 1.5rem;
+}
+
+.streamContent {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: var(--primary-color);
+}
+
+.streamCursor {
+  display: inline-block;
+  background: var(--primary-color);
+  width: 8px;
+  height: 1.2em;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.streamControls {
+  display: flex;
+  justify-content: center;
+}
+
+.actionButton {
+  background: var(--primary-color);
+  color: white;
+  border: 2px solid var(--primary-color);
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  &:hover:not(:disabled) {
+    background: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--secondary-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+  }
+}
+
+// 事件类型样式
+.eventTypes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.eventType {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--secondary-color);
+  border-radius: 8px;
+  transition: background 0.3s;
+
+  &:hover {
+    background: var(--border-color);
+  }
+}
+
+.eventBadge {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  min-width: 80px;
+  text-align: center;
+}
+
+// UI渲染实现样式
+.uiRenderingContent {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.renderingItem {
+  padding: 1rem;
+  background: var(--secondary-color);
+  border-radius: 8px;
+  border-left: 3px solid var(--primary-color);
+
+  h4 {
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  p {
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
+    font-size: 0.9rem;
+  }
+
+  .miniCode {
+    font-size: 0.75rem;
+    padding: 0.8rem;
+  }
+}
+
+// 代码块样式
+.codeBlock {
+  background: var(--code-bg);
+  color: var(--code-text);
+  border-radius: 8px;
+  padding: 1.5rem;
+  overflow-x: auto;
+  font-family: 'SF Mono', Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-top: 1.5rem;
+}
+
+.codeContent {
+  margin: 0;
+}
+
+.explanationPanel {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.explanationTitle {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.explanationPoints {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--secondary-color);
+  border-radius: 8px;
+
+  h5 {
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+  }
+
+  ul {
+    padding-left: 1.5rem;
+
+    li {
+      margin-bottom: 0.5rem;
+      color: var(--text-color);
+      line-height: 1.5;
+    }
+  }
+}
+
+// 对比表格样式
+.comparisonTable {
+  overflow-x: auto;
+  margin-bottom: 2rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--card-bg);
+  box-shadow: 0 8px 30px var(--shadow-color);
+}
+
+.tableHeader, .tableCell {
+  padding: 1.2rem 1.5rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tableHeader {
+  background: var(--secondary-color);
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.tableCell {
+  color: var(--text-color);
+}
+
+// 总结区域样式
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.summaryCard {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 30px var(--shadow-color);
+  text-align: center;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  h3 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+  }
+
+  p {
+    color: var(--text-color);
+    opacity: 0.8;
+    line-height: 1.6;
+  }
+}
+
+.conclusionCard {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  color: var(--text-color);
+  border-radius: 16px;
+  padding: 2.5rem;
+  text-align: center;
+  box-shadow: 0 8px 30px var(--shadow-color);
+
+  h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: var(--text-color);
+  }
+
+  p {
+    line-height: 1.7;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    opacity: 0.9;
+  }
+}
+
+// 底部样式
+.footer {
+  padding: 4rem 0 3rem;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.footerContent {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.footerLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  color: var(--primary-color);
+
+  span {
+    font-size: 2.2rem;
+    margin-right: 0.8rem;
+  }
+}
+
+.logoText {
+  font-weight: 700;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+}
+
+.footerText {
+  color: var(--text-secondary);
+  margin-bottom: 1.8rem;
+  font-size: 1.1rem;
+}
+
+.footerLinks {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  margin: 1.8rem 0;
+
+  @media (max-width: $tablet) {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+}
+
+.footerLink {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: all 0.3s;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  padding: 0.5rem 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+  }
+
+  &:hover {
+    color: var(--accent-color);
+
+    &::after {
+      width: 100%;
+    }
+  }
+}
+
+// 响应式样式
+@media (max-width: 768px) {
+  .headerTitle {
+    font-size: 2.2rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.8rem;
+  }
+
+  .comparisonGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .flowStep {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .flowArrow {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+  }
+
+  .stepNumber {
+    align-self: center;
+  }
+
+  .demoCard, .summaryCard, .pitfallCard {
+    padding: 1.5rem;
+  }
+
+  .pitfallsGrid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .uiRenderingContent {
+    gap: 1.5rem;
+  }
+
+  .miniCode {
+    font-size: 0.75rem;
+  }
+
+  .codeBlock {
+    font-size: 0.8rem;
+    padding: 1rem;
+  }
+}

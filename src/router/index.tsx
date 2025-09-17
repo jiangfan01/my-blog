@@ -11,6 +11,10 @@ import CategoryPage from "../pages/algorithm/CategoryPage.tsx";
 import AnimationScene from "../pages/scene/Detail/AnimationScene/AnimationScene.tsx";
 import ZustandScene from "../pages/scene/Detail/ZustandScene/ZustandScene.tsx";
 import NodeJwtScene from "../pages/scene/Detail/NodeJwtScene/NodeJwtScene.tsx";
+import TSUtilsScene from "../pages/scene/Detail/TSUtilsScene/TSUtilsScene.tsx";
+import SSEChatScene from "../pages/scene/Detail/SSEChatScene/SSEChatScene.tsx";
+import ReactQueryScene from "../pages/scene/Detail/ReactQueryScene/ReactQueryScene.tsx";
+import ViteOptimizationScene from "../pages/scene/Detail/ViteOptimizationScene/ViteOptimizationScene.tsx";
 
 // 懒加载页面
 const Welcome = lazy(() => import("../pages/welcome"));
@@ -50,12 +54,16 @@ const App = () => {
 
                     {/*开发场景*/}
                     <Route path="scene/Page" element={<ScenePage/>}/>
-                    <Route path="scene/detail/animation" element={<AnimationScene />} />
-                    <Route path="scene/detail/zustand" element={<ZustandScene />} />
-                    <Route path="scene/detail/nodeJwt" element={<NodeJwtScene />} />
+                    <Route path="scene/detail/animation" element={<AnimationScene/>}/>
+                    <Route path="scene/detail/zustand" element={<ZustandScene/>}/>
+                    <Route path="scene/detail/nodeJwt" element={<NodeJwtScene/>}/>
+                    <Route path="scene/detail/tsUtils" element={<TSUtilsScene/>}/>
+                    <Route path="scene/detail/SSEChatScene" element={<SSEChatScene/>}/>
+                    <Route path="scene/detail/reactQuery" element={<ReactQueryScene/>}/>
+                    <Route path="scene/detail/viteOptimization" element={<ViteOptimizationScene/>}/>
 
                     {/*    算法专区*/}
-                    <Route path="algorithm/Page" element={<Algorithm/>}/>
+                        <Route path="algorithm/Page" element={<Algorithm/>}/>
                     <Route path="algorithm/page/:category" element={<CategoryPage/>}/>
                 </Route>
 
